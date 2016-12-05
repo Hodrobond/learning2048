@@ -1,0 +1,20 @@
+{
+  "name": "learning2048",
+  "version": "1.0.0",
+  "description": "Creating 2048 to learn/practice browserify/es6+babel/react+reduc",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -p 9001",
+    "webpack": "webpack"
+  },
+  "author": "Adam Kazberuk",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-latest": "^6.16.0",
+    "http-server": "^0.9.0",
+    "webpack": "^1.13.3"
+  }
+}
