@@ -21,7 +21,7 @@ class Board extends Component {
     render() {
         const { value, moveUp, moveRight, moveDown, moveLeft, newGame} = this.props
         return (
-            <p>
+            <div>
                 <table>
                     <tbody>
                         {this.props.value.map(x => <tr>{
@@ -49,7 +49,7 @@ class Board extends Component {
                 <button onClick={newGame}>
                     New Game
                 </button>
-            </p>
+            </div>
         )
     }
 }

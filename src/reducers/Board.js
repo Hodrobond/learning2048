@@ -7,13 +7,13 @@ export default (state = 0, action) => {
     }
     switch (action.type) {
         case 'MOVE_UP':
-            return moveUp(state);
+            return move(state, 0);
         case 'MOVE_RIGHT':
-            return moveRight(state);
+            return move(state, 1);
         case 'MOVE_DOWN':
-            return moveDown(state);
+            return move(state, 2);
         case 'MOVE_LEFT':
-            return moveLeft(state);
+            return move(state, 3);
         case 'NEW_GAME':
             return createBoard();
         default:
@@ -21,7 +21,7 @@ export default (state = 0, action) => {
     }
 }
 
-function createBoard(){
+function createBoard() {
     var board = [];//initialize array
     var boardSize = 4;
     var popRate = 0.2;
@@ -60,22 +60,129 @@ function getNewTileBasic(){
         return 2;
 }
 
-function moveUp(board){
-    console.log("up");
-    return board;
+function move(board, direction){
+    //0: up, 1: right, 2: down, 3: left
+    switch(direction){
+        case 0:
+            var b = mergeBoardUp(board);
+            break;
+        case 1:
+            var b = board.map(x => mergeRowRight(x));
+            break;
+        case 2:
+            var b = mergeBoardDown(board);
+            break;
+        case 3:
+            var b = board.map(x => mergeRowLeft(x));
+            break;
+        default:
+            var b = board.map(x => x);
+    }
+    return b;
 }
 
-function moveRight(board){
-    console.log("right");
-    return board;
+function shiftRowRight(a){
+    var row = a.map(x => x);
+    var previousIndex = row.length - 1;
+    for(let i = row.length - 1; i >= 0 ; i--){
+        if(row[i] !== 0){
+            row[previousIndex] = row[i];
+            if(i !== previousIndex){
+                row[i] = 0;
+            }
+            previousIndex--;
+        }
+    }
+    return row;
 }
 
-function moveDown(board){
-    console.log("down");
-    return board;
+function shiftRowLeft(a){
+    var row = a.map(x => x);
+    var previousIndex = 0;
+    for(let i = 0; i < row.length ; i++){
+        if(row[i] !== 0){
+            row[previousIndex] = row[i];
+            if(i !== previousIndex){
+                row[i] = 0;
+            }
+            previousIndex++;
+        }
+    }
+    return row;
 }
 
-function moveLeft(board){
-    console.log("left");
-    return board;
+function mergeBoardUp (board) {
+    var b = rotateBoardRight(board);
+    var c = b.map(x => mergeRowRight(x));
+    var d = rotateBoardLeft(c);
+    return d;
+}
+
+function mergeRowRight (row){
+    var a = row.map(x => x);
+    a = shiftRowRight(a);
+    for(let i = a.length -1; i >= 0; i--){
+        for(let j = i - 1; j >= 0; j--){
+            if(a[j] && a[j] !== 0 && a[i] === a[j]){
+                a[i] *= 2;
+                a[j] = 0;
+                a = shiftRowRight(a);
+                i--;
+            }
+            else if(a[j] !== 0)
+                break;
+        }//j
+    }//i
+    return a;
+}
+
+function mergeBoardDown(board) {
+    var b = rotateBoardLeft(board);
+    var c = b.map(x => mergeRowRight(x));
+    var d = rotateBoardRight(c);
+    return d;
+}
+
+function mergeRowLeft (row){
+    var a = row.map(x => x);
+    a = shiftRowLeft(a);
+    for(let i = 0; i < a.length; i++){
+        for(let j = i + 1; j < a.length; j++){
+            if(a[j] && a[j] !== 0 && a[i] === a[j]){
+                a[i] *= 2;
+                a[j] = 0;
+                a = shiftRowLeft(a);
+                i++;
+            }
+            else if(a[j] !== 0)
+                break;
+        }//j
+    }//i
+    return a;
+}
+
+function rotateBoardRight(board){
+    var temp = new Array(board.length);
+    var i, j;
+    for(i = 0; i < temp.length; ++i){
+        temp[i] = new Array(temp.length);
+        for (j = 0; j < temp.length; ++j){
+            temp[i][j] = board[temp.length - j - 1][i];
+        }
+    }
+    return temp;
+}
+
+function rotateBoardLeft(board){
+    var temp = new Array(board.length);
+    var i, j;
+    for(let i = 0; i < temp.length; i++){
+        temp[i] = new Array(temp.length);
+    }
+    for(i = 0; i < temp.length; ++i){
+        for (j = 0; j < temp.length; ++j){
+            temp[i][j] = board[j][temp.length - i - 1];
+        }
+    }
+    return temp;
 }
