@@ -2,6 +2,7 @@
  * Created by adam.kazberuk on 12/5/2016.
  */
 import React, { Component, PropTypes } from 'react'
+import Tile from './Tile'
 
 class Board extends Component {
     static propTypes = {
@@ -25,7 +26,9 @@ class Board extends Component {
                 <table>
                     <tbody>
                         {this.props.value.board.map(x => <tr>{
-                            x.map(y => <td>{y}</td>)
+                            x.map(y =>
+                                <Tile number ={y}/>
+                            )
                         }</tr>)}
                     </tbody>
                 </table>
