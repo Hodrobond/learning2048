@@ -19,7 +19,7 @@ class Board extends Component {
     }
 
     render() {
-        const { value, moveUp, moveRight, moveDown, moveLeft, newGame} = this.props
+        const { value, moveUp, moveRight, moveDown, moveLeft, newGame, loss, victory} = this.props;
         return (
             <div>
                 <table>
