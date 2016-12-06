@@ -1,17 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
-import Counter from './components/Counter'
-import counter from './reducers'
+import Board from './components/Board'
+import board from './reducers/Board'
 
-const store = createStore(counter)
+const store = createStore(board)
 const rootEl = document.getElementById('root')
 
 const render = () => ReactDOM.render(
-    <Counter
+    <Board
         value={store.getState()}
-        onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
-        onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
+        moveUp={() => store.dispatch({ type: 'MOVE_UP' })}
+        moveRight={() => store.dispatch({ type: 'MOVE_RIGHT' })}
+        moveDown={() => store.dispatch({ type: 'MOVE_DOWN' })}
+        moveLeft={() => store.dispatch({ type: 'MOVE_LEFT' })}
+        newGame={() => store.dispatch({ type: 'NEW_GAME' })}
     />,
     rootEl
 )
