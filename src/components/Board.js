@@ -3,6 +3,7 @@
  */
 import React, { Component, PropTypes } from 'react'
 import Tile from './Tile'
+import VictoryNotification from "./VictoryNotification"
 
 class Board extends Component {
     static propTypes = {
@@ -32,6 +33,8 @@ class Board extends Component {
                         }</tr>)}
                     </tbody>
                 </table>
+                {' '}
+                <VictoryNotification victory={this.props.value.victory}/>
                 {' '}
                 <button onClick={moveUp}>
                     Up
