@@ -36,7 +36,9 @@ function createBoard() {
             }
         }
     }
-    return board;
+    var victory = false;
+    var loss = false;
+    return {board, victory, loss};
 }
 
 //adapt an array for rates instead of adding else ifs
@@ -60,7 +62,9 @@ function getNewTileBasic(){
         return 2;
 }
 
-function move(board, direction){
+function move(state, direction){
+    let newState = JSON.parse(JSON.stringify(state));
+    var board = state.board.slice();
     //0: up, 1: right, 2: down, 3: left
     var b;
     switch(direction){
@@ -68,13 +72,13 @@ function move(board, direction){
             b = mergeBoardUp(board);
             break;
         case 1:
-            b = board.map(x => mergeRowRight(x));
+            b = mergeBoardRight(board);
             break;
         case 2:
             b = mergeBoardDown(board);
             break;
         case 3:
-            b = board.map(x => mergeRowLeft(x));
+            b = mergeBoardLeft(board);
             break;
         default:
             b = board.map(x => x);
@@ -82,7 +86,15 @@ function move(board, direction){
     if(!compareArrayNumerical(board, b)){
         b = addNewTile(b);
     }
-    return b;
+    if(checkLoss(board)){
+        newState.loss = true;
+    }
+    newState.board = b;
+    return newState;
+}
+
+function checkLoss(board){
+
 }
 
 function compareArrayNumerical(array1, array2){
@@ -143,56 +155,62 @@ function shiftRowLeft(a){
 
 function mergeBoardUp (board) {
     var b = rotateBoardRight(board);
-    var c = b.map(x => mergeRowRight(x));
+    var c = mergeBoardRight(b);
     var d = rotateBoardLeft(c);
     return d;
 }
 
-function mergeRowRight (row){
-    var a = row.map(x => x);
-    a = shiftRowRight(a);
-    for(let i = a.length -1; i >= 0; i--){
-        for(let j = i - 1; j >= 0; j--){
-            if(a[j] && a[j] !== 0 && a[i] === a[j]){
-                a[i] *= 2;
-                a[j] = 0;
-                a = shiftRowRight(a);
-                i--;
-            }
-            else if(a[j] !== 0)
-                break;
-        }//j
-    }//i
-    return a;
+function mergeBoardRight(board){
+    var b = board.map(row => {
+        var a = row.map(x => x);
+        a = shiftRowRight(a);
+        for(let i = a.length -1; i >= 0; i--){
+            for(let j = i - 1; j >= 0; j--){
+                if(a[j] && a[j] !== 0 && a[i] === a[j]){
+                    a[i] *= 2;
+                    a[j] = 0;
+                    a = shiftRowRight(a);
+                    i--;
+                }
+                else if(a[j] !== 0)
+                    break;
+            }//j
+        }//i
+        return a;
+    })
+    return b;
 }
 
 function mergeBoardDown(board) {
     var b = rotateBoardLeft(board);
-    var c = b.map(x => mergeRowRight(x));
+    var c = mergeBoardRight(b);
     var d = rotateBoardRight(c);
     return d;
 }
 
-function mergeRowLeft (row){
-    var a = row.map(x => x);
-    a = shiftRowLeft(a);
-    for(let i = 0; i < a.length; i++){
-        for(let j = i + 1; j < a.length; j++){
-            if(a[j] && a[j] !== 0 && a[i] === a[j]){
-                a[i] *= 2;
-                a[j] = 0;
-                a = shiftRowLeft(a);
-                i++;
-            }
-            else if(a[j] !== 0)
-                break;
-        }//j
-    }//i
-    return a;
+function mergeBoardLeft (board){
+    let b = board.map(row => {
+        let a = row.map(x => x);
+            a = shiftRowLeft(a);
+            for(let i = 0; i < a.length; i++){
+                for(let j = i + 1; j < a.length; j++){
+                    if(a[j] && a[j] !== 0 && a[i] === a[j]){
+                        a[i] *= 2;
+                        a[j] = 0;
+                        a = shiftRowLeft(a);
+                        i++;
+                    }
+                    else if(a[j] !== 0)
+                        break;
+                }//j
+            }//i
+            return a;
+        })
+    return b;
 }
 
 function rotateBoardRight(board){
-    var temp = new Array(board.length);
+    let temp = new Array(board.length);
     var i, j;
     for(i = 0; i < temp.length; ++i){
         temp[i] = new Array(temp.length);

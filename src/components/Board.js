@@ -24,7 +24,7 @@ class Board extends Component {
             <div>
                 <table>
                     <tbody>
-                        {this.props.value.map(x => <tr>{
+                        {this.props.value.board.map(x => <tr>{
                             x.map(y => <td>{y}</td>)
                         }</tr>)}
                     </tbody>
