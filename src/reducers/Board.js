@@ -62,23 +62,53 @@ function getNewTileBasic(){
 
 function move(board, direction){
     //0: up, 1: right, 2: down, 3: left
+    var b;
     switch(direction){
         case 0:
-            var b = mergeBoardUp(board);
+            b = mergeBoardUp(board);
             break;
         case 1:
-            var b = board.map(x => mergeRowRight(x));
+            b = board.map(x => mergeRowRight(x));
             break;
         case 2:
-            var b = mergeBoardDown(board);
+            b = mergeBoardDown(board);
             break;
         case 3:
-            var b = board.map(x => mergeRowLeft(x));
+            b = board.map(x => mergeRowLeft(x));
             break;
         default:
-            var b = board.map(x => x);
+            b = board.map(x => x);
+    }
+    if(!compareArrayNumerical(board, b)){
+        b = addNewTile(b);
     }
     return b;
+}
+
+function compareArrayNumerical(array1, array2){
+    if(array1.length !== array2.length)
+        return false;
+    for(let i = 0; i < array1.length; i++){
+        if(array1[i].length !== array2[i].length)
+            return false
+        for(let j = 0; j < array1[i].length; j++){
+            if(array1[i][j] !== array2[i][j])
+                return false;
+        }
+    }
+    return true;
+}
+
+function addNewTile(board){
+    var b = board.map(x => x);
+    while(true){
+        var randX = Math.floor(Math.random()*4);
+        var randY = Math.floor(Math.random()*4);
+        if(b[randX][randY] === 0){
+            b[randX][randY] = getNewTileValue();
+            return b;
+        }
+    }
 }
 
 function shiftRowRight(a){
