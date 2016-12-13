@@ -1,11 +1,27 @@
 /**
  * Created by adam.kazberuk on 12/7/2016.
  */
+
+/*
+    {
+        loss: false
+        victory: false
+        victoryAcknowledged: false
+    }
+
+ */
 export default (state = 0, action) => {
     if(state === 0){
         return initialize();
     }
     switch (action.type) {
+        case "GAME_WIN":
+            return {...state,
+                victory : true};
+            break;
+        case "NEW_GAME":
+            return initialize();
+            break;
         default:
             return state;
     }

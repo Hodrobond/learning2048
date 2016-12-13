@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react'
 import Board from './grid/Board'
-import Notifications from "./Notifications"
+import Notifications from "./notifications/Notifications"
 
 class App extends Component {
     componentDidMount(){
