@@ -6,8 +6,8 @@ import Tile from './Tile'
 
 const Row= props => (
     <tr>{
-        props.value.map(x =>
-            <Tile number={x}/>
+        props.value.map((x, i) =>
+            <Tile number={x} key={i}/>
         )
     }</tr>
 )
