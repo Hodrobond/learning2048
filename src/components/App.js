@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react'
 import Board from './grid/Board'
-import VictoryNotification from "./VictoryNotification"
+import Notifications from "./Notifications"
 
 class App extends Component {
     componentDidMount(){
@@ -13,11 +13,11 @@ class App extends Component {
     componentWillUnmount(){
         this.unsubscribe();
     }
-    render() {
+    render(props, store) {
         return (
             <div>
-                <Board/>
-                <VictoryNotification/>
+                <Board value={this.context.store.getState().Board}/>
+                <Notifications value={this.context.store.getState().Notifications}/>
             </div>
         )
     }
