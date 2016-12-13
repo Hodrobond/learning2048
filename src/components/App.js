@@ -4,7 +4,6 @@
 import React, {Component} from 'react'
 import Board from './grid/Board'
 import VictoryNotification from "./VictoryNotification"
-import MovementButtons from './MovementButtons'
 
 class App extends Component {
     componentDidMount(){
@@ -19,7 +18,6 @@ class App extends Component {
             <div>
                 <Board/>
                 <VictoryNotification/>
-                <MovementButtons/>
             </div>
         )
     }

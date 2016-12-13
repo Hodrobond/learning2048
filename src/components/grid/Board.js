@@ -3,6 +3,7 @@
  */
 import React, { PropTypes } from 'react'
 import Row from "./Row"
+import MovementButtons from '../MovementButtons'
 
 const Board = (props, {store}) => {
     return (
@@ -14,6 +15,7 @@ const Board = (props, {store}) => {
                     )}
                 </tbody>
             </table>
+            <MovementButtons/>
         </div>
     )
 }
