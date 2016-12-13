@@ -15,11 +15,12 @@ class Notifications extends Component {
         this.unsubscribe();
     }
     render(dispatch){
-        if(this.props.value.victory){
+        if(this.props.value.victory && !this.props.value.victoryAcknowledged){
             //display popup
             return <div>
                         <Victory/>
                         <button onClick={this.newGame.bind(this)}>NEW GAME</button>
+                        <button onClick={this.continueGame.bind(this)}>CONTINUE GAME</button>
                     </div>
         }
         else if(this.props.value.loss){
@@ -33,6 +34,9 @@ class Notifications extends Component {
     }
     newGame(){
         return this.context.store.dispatch({type:"NEW_GAME"});
+    }
+    continueGame(){
+        return this.context.store.dispatch({type:"GAME_CONTINUE"});
     }
 }
 

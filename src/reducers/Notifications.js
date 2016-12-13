@@ -22,6 +22,12 @@ export default (state = 0, action) => {
         case "NEW_GAME":
             return initialize();
             break;
+        case "GAME_LOSE":
+            return {...state,
+                loss: true};
+        case "GAME_CONTINUE":
+            return {...state,
+                victoryAcknowledged: true};
         default:
             return state;
     }
