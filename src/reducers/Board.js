@@ -36,9 +36,7 @@ function createBoard() {
             }
         }
     }
-    var victory = false;
-    var loss = false;
-    return {board, victory, loss};
+    return board;
 }
 
 //adapt an array for rates instead of adding else ifs
@@ -52,28 +50,8 @@ function getNewTileValue(){
     }
 }
 
-function getNewTileBasic(){
-    var sample = Math.random();
-    if(sample < 0.0125)
-        return 8;
-    else if(sample < 0.1)
-        return 4;
-    else
-        return 2;
-}
-
-function move(state, direction){
-    let newState = JSON.parse(JSON.stringify(state));
-    var board = state.board.slice();
+function move(board, direction){
     //0: up, 1: right, 2: down, 3: left
-    if(state.loss){
-        //display loss message
-    }
-    switch(state.victory){
-        case "new":
-            //display victory popup, allow user to continue
-            break;
-    }
     var b;
     switch(direction){
         case 0:
@@ -94,38 +72,7 @@ function move(state, direction){
     if(!compareArrayNumerical(board, b)){
         b = addNewTile(b);
     }
-    if(checkLoss(board)){
-        newState.loss = true;
-    }
-    if(state.victory !== "old" && checkVictory(board)){
-        newState.victory = "new";
-    }
-    newState.board = b;
-    return newState;
-}
-
-function checkLoss(board){
-    var containsZero = false;
-    for(let i = 0; i < board.length; i++){
-        for(let j = 0; j < board[i].length; j++){
-            if(board[i][j] === 0)
-                containsZero = true;
-        }
-    }
-    if(!containsZero){
-        var up = mergeBoardUp(board);
-        var right = mergeBoardRight(board);
-        var down = mergeBoardDown(board);
-        var left = mergeBoardLeft(board);
-        if(compareArrayNumerical(up, right) && compareArrayNumerical(right, down) && compareArrayNumerical(down, left)){
-            return true;
-        }
-    }
-    return false;
-}
-
-function checkVictory(board){
-    return false;
+    return b;
 }
 
 function compareArrayNumerical(array1, array2){

@@ -1,26 +1,32 @@
 /**
  * Created by adam.kazberuk on 12/6/2016.
  */
-import React, { Component, PropTypes } from 'react'
-import Board from './Board'
+import React, {Component} from 'react'
+import Board from './grid/Board'
+import VictoryNotification from "./VictoryNotification"
+import MovementButtons from './MovementButtons'
 
-class App extends Component{
-    static propTypes = {
-        moveUp: PropTypes.func.isRequired,
-        moveRight: PropTypes.func.isRequired,
-        moveDown: PropTypes.func.isRequired,
-        moveLeft: PropTypes.func.isRequired,
-        newGame: PropTypes.func.isRequired
+class App extends Component {
+    componentDidMount(){
+        const {store} = this.context;
+        this.unsubscribe = store.subscribe(() => this.forceUpdate())
     }
-    render(){
-        const {value, moveUp, moveRight, moveDown, moveLeft, newGame} = this.props;
-
+    componentWillUnmount(){
+        this.unsubscribe();
+    }
+    render() {
         return (
             <div>
-                <Board value={value} moveUp={moveUp} moveRight={moveRight} moveDown={moveDown} moveLeft={moveLeft} newGame={newGame}/>
+                <Board/>
+                <VictoryNotification/>
+                <MovementButtons/>
             </div>
         )
     }
+}
+
+App.contextTypes = {
+    store: React.PropTypes.object
 }
 
 export default App

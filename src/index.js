@@ -1,23 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 import App from './components/App'
-import board from './reducers/Board'
+import Provider from './components/Provider'
+import combinedReducer from './reducers/index'
 
-const store = createStore(board)
 const rootEl = document.getElementById('root')
 
 const render = () => ReactDOM.render(
-    <App
-        value={store.getState()}
-        moveUp={() => store.dispatch({ type: 'MOVE_UP' })}
-        moveRight={() => store.dispatch({ type: 'MOVE_RIGHT' })}
-        moveDown={() => store.dispatch({ type: 'MOVE_DOWN' })}
-        moveLeft={() => store.dispatch({ type: 'MOVE_LEFT' })}
-        newGame={() => store.dispatch({ type: 'NEW_GAME' })}
-    />,
+    <Provider store={createStore(combinedReducer, applyMiddleware(thunk))}>
+        <App/>
+    </Provider>,
     rootEl
 )
 
 render()
-store.subscribe(render)
