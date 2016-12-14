@@ -15,17 +15,17 @@ export default (state = 0, action) => {
         return initialize();
     }
     switch (action.type) {
-        case "GAME_WIN":
+        case "WIN_GAME":
             return {...state,
                 victory : true};
             break;
         case "NEW_GAME":
             return initialize();
             break;
-        case "GAME_LOSE":
+        case "LOSE_GAME":
             return {...state,
                 loss: true};
-        case "GAME_CONTINUE":
+        case "CONTINUE_GAME":
             return {...state,
                 victoryAcknowledged: true};
         default:
