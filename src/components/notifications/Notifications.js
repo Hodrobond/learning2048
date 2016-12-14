@@ -3,6 +3,7 @@
  */
 import * as notificationActions from '../../actions/Notifications'
 import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import Loss from "./Loss"
 import Victory from "./Victory"
@@ -35,14 +36,9 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    newGame: () => {
-        dispatch(notificationActions.newGame())
-    },
-    continueGame: () => {
-        dispatch(notificationActions.continueGame())
-    }
-})
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({ newGame, continueGame}, dispatch);
+}
 
 Notifications.contextTypes = {
     store: React.PropTypes.object

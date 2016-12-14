@@ -2,6 +2,7 @@
  * Created by adam.kazberuk on 12/5/2016.
  */
 import React, { PropTypes } from 'react'
+import {connect} from 'react-redux'
 import Row from "./Row"
 import MovementButtons from '../MovementButtons'
 
@@ -10,7 +11,7 @@ const Board = (props, {store}) => {
         <div>
             <table>
                 <tbody>
-                    {store.getState().Board.map((x, i) =>
+                    {props.Board.map((x, i) =>
                         <Row value={x} key={i}/>
                     )}
                 </tbody>
@@ -18,6 +19,12 @@ const Board = (props, {store}) => {
             <MovementButtons/>
         </div>
     )
+}
+
+const mapStateToProps = (state) => {
+    return {
+        Board: state.Board
+    }
 }
 
 Board.contextTypes = {
@@ -28,4 +35,4 @@ Board.propTypes = {
     value: PropTypes.array
 }
 
-export default Board
+export default connect(mapStateToProps)(Board)
