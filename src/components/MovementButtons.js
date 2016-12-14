@@ -2,44 +2,40 @@
  * Created by adam.kazberuk on 12/7/2016.
  */
 
-import React from 'react'
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
+import {moveUp, moveRight, moveDown, moveLeft, newGame, winGame} from '../actions/MovementButtons'
 
-function MovementButtons({dispatch}){
-    function moveUp(){
-        return dispatch({type: "MOVE_UP"})
+class MovementButtons extends Component {
+    render(){
+        return(
+            <div>
+                <button onClick={() => this.props.moveUp()}>Up</button>
+                {' '}
+                <button onClick={() => this.props.moveRight()}>Right</button>
+                {' '}
+                <button onClick={() => this.props.moveDown()}>Down</button>
+                {' '}
+                <button onClick={() => this.props.moveLeft()}>Left</button>
+                {' '}
+                <button onClick={() => this.props.newGame()}>New Game</button>
+                {' '}
+                <button onClick={() => this.props.winGame()}>Win Game</button>
+            </div>
+            )
     }
+}
 
-    function moveRight(){
-        return dispatch({type: "MOVE_RIGHT"})
+const mapStateToProps = (state) => {
+    return {
+        Notification: state.Notifications
     }
+}
 
-    function moveDown(){
-        return dispatch({type: "MOVE_DOWN"})
-    }
-
-    function moveLeft(){
-        return dispatch({type: "MOVE_LEFT"})
-    }
-
-    function newGame(){
-        return dispatch({type: "NEW_GAME"})
-    }
-
-    return(
-        <div>
-            <button onClick={moveUp}>Up</button>
-            {' '}
-            <button onClick={moveRight}>Right</button>
-            {' '}
-            <button onClick={moveDown}>Down</button>
-            {' '}
-            <button onClick={moveLeft}>Left</button>
-            {' '}
-            <button onClick={newGame}>New Game</button>
-        </div>
-    )
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({ moveUp, moveRight, moveDown, moveLeft, newGame, winGame}, dispatch);
 }
 
 
-export default connect()(MovementButtons);
+export default connect(mapStateToProps, mapDispatchToProps)(MovementButtons);
