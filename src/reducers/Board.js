@@ -1,7 +1,7 @@
 /**
  * Created by adam.kazberuk on 12/5/2016.
  */
-import undoable, {distinctState} from 'redux-undo'
+import undoable from 'redux-undo'
 
 const Board = (state = 0, action) => {
     if(state === 0){
