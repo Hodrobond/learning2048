@@ -21,6 +21,7 @@ class Notifications extends Component {
         else if(this.props.Notification.loss){
             return <div>
                         <Loss/>
+                        <button onClick={() => this.props.newGame()}>NEW GAME</button>
                     </div>
         }
         else{

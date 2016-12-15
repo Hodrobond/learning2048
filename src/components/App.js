@@ -19,7 +19,7 @@ class App extends Component{
 
     handleKeyDown(event){
         var code = event.keyCode;
-        if (event.charCode && code == 0)
+        if (event.charCode && code === 0)
             code = event.charCode;
         switch(code) {
             case 37:
@@ -37,6 +37,8 @@ class App extends Component{
             case 40:
                 this.props.moveDown()
                 // Key down.
+                break;
+            default:
                 break;
         }
     }

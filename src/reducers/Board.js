@@ -1,7 +1,9 @@
 /**
  * Created by adam.kazberuk on 12/5/2016.
  */
-export default (state = 0, action) => {
+import undoable, {distinctState} from 'redux-undo'
+
+const Board = (state = 0, action) => {
     if(state === 0){
         return createBoard();
     }
@@ -140,23 +142,23 @@ function mergeBoardUp (board) {
 
 function mergeBoardRight(board){
     var b = board.map(row => {
-        var a = row.map(x => x);
-        a = shiftRowRight(a);
-        for(let i = a.length -1; i >= 0; i--){
-            for(let j = i - 1; j >= 0; j--){
-                if(a[j] && a[j] !== 0 && a[i] === a[j]){
-                    a[i] *= 2;
-                    a[j] = 0;
-                    a = shiftRowRight(a);
-                    i--;
-                }
-                else if(a[j] !== 0)
-                    break;
-            }//j
-        }//i
-        return a;
-    })
-    return b;
+            var a = row.map(x => x);
+    a = shiftRowRight(a);
+    for(let i = a.length -1; i >= 0; i--){
+        for(let j = i - 1; j >= 0; j--){
+            if(a[j] && a[j] !== 0 && a[i] === a[j]){
+                a[i] *= 2;
+                a[j] = 0;
+                a = shiftRowRight(a);
+                i--;
+            }
+            else if(a[j] !== 0)
+                break;
+        }//j
+    }//i
+    return a;
+})
+return b;
 }
 
 function mergeBoardDown(board) {
@@ -168,23 +170,23 @@ function mergeBoardDown(board) {
 
 function mergeBoardLeft (board){
     let b = board.map(row => {
-        let a = row.map(x => x);
-            a = shiftRowLeft(a);
-            for(let i = 0; i < a.length; i++){
-                for(let j = i + 1; j < a.length; j++){
-                    if(a[j] && a[j] !== 0 && a[i] === a[j]){
-                        a[i] *= 2;
-                        a[j] = 0;
-                        a = shiftRowLeft(a);
-                        i++;
-                    }
-                    else if(a[j] !== 0)
-                        break;
-                }//j
-            }//i
-            return a;
-        })
-    return b;
+            let a = row.map(x => x);
+    a = shiftRowLeft(a);
+    for(let i = 0; i < a.length; i++){
+        for(let j = i + 1; j < a.length; j++){
+            if(a[j] && a[j] !== 0 && a[i] === a[j]){
+                a[i] *= 2;
+                a[j] = 0;
+                a = shiftRowLeft(a);
+                i++;
+            }
+            else if(a[j] !== 0)
+                break;
+        }//j
+    }//i
+    return a;
+})
+return b;
 }
 
 function rotateBoardRight(board){
@@ -212,3 +214,9 @@ function rotateBoardLeft(board){
     }
     return temp;
 }
+
+const undoableBoard = undoable(Board, {
+    filter: distinctState()
+})
+
+export default undoableBoard;
