@@ -1,7 +1,6 @@
 /**
  * Created by adam.kazberuk on 12/6/2016.
  */
-import * as notificationActions from '../../actions/Notifications'
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
