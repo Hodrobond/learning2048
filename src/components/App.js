@@ -6,6 +6,8 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import Board from './grid/Board'
 import Notifications from "./notifications/Notifications"
+import History from "./history/History"
+
 import {moveUp, moveRight, moveDown, moveLeft, newGame, winGame} from '../actions/MovementButtons'
 
 class App extends Component{
@@ -48,6 +50,7 @@ class App extends Component{
             <div>
                 <Board/>
                 <Notifications/>
+                <History/>
             </div>
         )
     }

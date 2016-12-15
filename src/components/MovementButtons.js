@@ -5,7 +5,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
-import {moveUp, moveRight, moveDown, moveLeft, newGame, winGame, loseGame, undo, redo} from '../actions/MovementButtons'
+import {moveUp, moveRight, moveDown, moveLeft, newGame, winGame, loseGame} from '../actions/MovementButtons'
 
 class MovementButtons extends Component {
     render(){
@@ -25,9 +25,6 @@ class MovementButtons extends Component {
                 {' '}
                 <button onClick={() => this.props.loseGame()}>Lose Game</button>
                 {' '}
-                <button onClick={() => this.props.undo()}>Undo</button>
-                {' '}
-                <button onClick={() => this.props.redo()}>Redo</button>
             </div>
             )
     }
@@ -40,7 +37,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ moveUp, moveRight, moveDown, moveLeft, newGame, winGame, loseGame, undo, redo}, dispatch);
+    return bindActionCreators({ moveUp, moveRight, moveDown, moveLeft, newGame, winGame, loseGame}, dispatch);
 }
 
 
