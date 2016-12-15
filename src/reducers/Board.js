@@ -215,8 +215,21 @@ function rotateBoardLeft(board){
     return temp;
 }
 
-const undoableBoard = undoable(Board, {
-    filter: distinctState()
-})
+
+
+const undoableBoard = undoable(Board,
+    {filter: function distinctBoard(action, currentState, previousState){
+        if(previousState === undefined){
+            return true;
+        }
+        for(var i=0; i<currentState.length; i++){
+            for(var j=0; j<currentState[i].length; j++){
+                if(currentState[i][j] !== previousState[i][j])
+                    return true;
+            }
+        }
+        return false;
+    }}
+)
 
 export default undoableBoard;

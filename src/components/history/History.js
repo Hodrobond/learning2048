@@ -16,5 +16,4 @@ const History = () => {
     )
 }
 
-
 export default connect()(History);

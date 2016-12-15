@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import {undo} from "../../actions/History"
 
-
 class Undo extends Component{
     render(){
         return (
