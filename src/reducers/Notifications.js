@@ -18,10 +18,8 @@ export default (state = 0, action) => {
         case "WIN_GAME":
             return {...state,
                 victory : true};
-            break;
         case "NEW_GAME":
             return initialize();
-            break;
         case "LOSE_GAME":
             return {...state,
                 loss: true};
