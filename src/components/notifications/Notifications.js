@@ -1,7 +1,7 @@
 /**
  * Created by adam.kazberuk on 12/6/2016.
  */
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import {connect} from 'react-redux'
 import Loss from "./Loss"
 import Victory from "./Victory"
