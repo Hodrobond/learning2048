@@ -11,7 +11,7 @@ const Board = (props, {store}) => {
         <div>
             <table>
                 <tbody>
-                    {props.Board.map((x, i) =>
+                    {props.Board.present.map((x, i) =>
                         <Row value={x} key={i}/>
                     )}
                 </tbody>
@@ -23,7 +23,7 @@ const Board = (props, {store}) => {
 
 const mapStateToProps = (state) => {
     return {
-        Board: state.App.Board.present
+        Board: state.App.Board
     }
 }
 

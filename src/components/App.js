@@ -49,7 +49,7 @@ class App extends Component{
         return (
             <div>
                 <Board board={this.props.App.Board}/>
-                <Notifications notifications={this.props.App.Notifications}/>
+                <Notifications Notification={this.props.App.Notifications}/>
                 <History/>
             </div>
         )
