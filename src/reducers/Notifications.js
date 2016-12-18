@@ -10,7 +10,10 @@
     }
 
  */
-export default (state = 0, action) => {
+
+import undoable, {distinctState} from 'redux-undo'
+
+const Notifications = (state = 0, action) => {
     if(state === 0){
         return initialize();
     }
@@ -41,3 +44,9 @@ function initialize(){
         victoryAcknowledged
     }
 }
+
+const undoableNotifications = undoable(Notifications,
+    {filter: distinctState()}
+)
+
+export default undoableNotifications;
