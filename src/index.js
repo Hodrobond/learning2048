@@ -6,12 +6,11 @@ import Provider from './components/Provider'
 import combinedReducer from './reducers/index'
 
 import logger from "./middleware/logger"
-import gameStatus from "./middleware/gameStatus"
 
 const rootEl = document.getElementById('root')
 
 const render = () => ReactDOM.render(
-    <Provider store={createStore(combinedReducer, applyMiddleware(logger, gameStatus))}>
+    <Provider store={createStore(combinedReducer, applyMiddleware(logger))}>
         <App/>
     </Provider>,
     rootEl

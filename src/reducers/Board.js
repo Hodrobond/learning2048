@@ -2,6 +2,7 @@
  * Created by adam.kazberuk on 12/5/2016.
  */
 import undoable from 'redux-undo'
+import {distinctBoardFilter} from '../utility/Board'
 
 const Board = (state = 0, action) => {
     if(state === 0){
@@ -218,18 +219,7 @@ function rotateBoardLeft(board){
 
 
 const undoableBoard = undoable(Board,
-    {filter: function distinctBoard(action, currentState, previousState){
-        if(previousState === undefined){
-            return true;
-        }
-        for(var i=0; i<currentState.length; i++){
-            for(var j=0; j<currentState[i].length; j++){
-                if(currentState[i][j] !== previousState[i][j])
-                    return true;
-            }
-        }
-        return false;
-    }}
+    {filter: distinctBoardFilter}
 )
 
 export default undoableBoard;
