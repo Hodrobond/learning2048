@@ -2,7 +2,7 @@
  * Created by adam.kazberuk on 12/5/2016.
  */
 import undoable from 'redux-undo'
-import {distinctBoardFilter} from '../utility/Board'
+import {distinctBoard, distinctBoardFilter} from '../utility/Board'
 
 const Board = (state = 0, action) => {
     if(state === 0){
@@ -72,24 +72,10 @@ function move(board, direction){
         default:
             b = board.map(x => x);
     }
-    if(!compareArrayNumerical(board, b)){
+    if(distinctBoard(board, b)){
         b = addNewTile(b);
     }
     return b;
-}
-
-function compareArrayNumerical(array1, array2){
-    if(array1.length !== array2.length)
-        return false;
-    for(let i = 0; i < array1.length; i++){
-        if(array1[i].length !== array2[i].length)
-            return false
-        for(let j = 0; j < array1[i].length; j++){
-            if(array1[i][j] !== array2[i][j])
-                return false;
-        }
-    }
-    return true;
 }
 
 function addNewTile(board){
