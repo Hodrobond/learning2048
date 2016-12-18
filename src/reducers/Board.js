@@ -202,8 +202,6 @@ function rotateBoardLeft(board){
     return temp;
 }
 
-
-
 const undoableBoard = undoable(Board,
     {filter: distinctBoardFilter}
 )

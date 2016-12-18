@@ -20,7 +20,7 @@ const Notifications = props => {
 
 const mapStateToProps = (state) => {
     return {
-        Notification: state.Notifications
+        Notification: state.App.Notifications
     }
 }
 

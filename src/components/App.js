@@ -48,11 +48,17 @@ class App extends Component{
     render(){
         return (
             <div>
-                <Board/>
-                <Notifications/>
+                <Board board={this.props.App.Board}/>
+                <Notifications notifications={this.props.App.Notifications}/>
                 <History/>
             </div>
         )
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        App: state.App
     }
 }
 
@@ -61,4 +67,4 @@ function mapDispatchToProps(dispatch){
 }
 
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -2,6 +2,8 @@
  * Created by adam.kazberuk on 12/15/2016.
  */
 export const distinctBoard = (currentState, previousState) => {
+    if(previousState === 0)
+      return true;
     if(previousState === undefined){
         return true;
     }
