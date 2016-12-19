@@ -7,3 +7,7 @@
 4. varying complexities
     hint-system
     tile placement
+
+
+Bugs
+1. new game doesn't clear History
