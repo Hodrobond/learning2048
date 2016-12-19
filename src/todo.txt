@@ -1,0 +1,9 @@
+1. test suite
+    -reducers
+    -rendering?
+    -utility?
+2. add high score functionality
+3. hint system/auto solver?
+4. varying complexities
+    hint-system
+    tile placement
