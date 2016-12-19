@@ -2,6 +2,8 @@
  * Created by adam.kazberuk on 12/6/2016.
  */
 import Board from './Board'
+import {distinctBoard} from '../utility/Board'
+import {moveUp, moveRight, moveDown, moveLeft} from '../actions/MovementButtons'
 
 const defaultNotifications = {
       loss: false,
@@ -17,11 +19,27 @@ const init = (state, action) => {
 }
 
 const gameWon = (board) => {
-
+    console.log(board);
+    for(let i=0; i < board.length; i++){
+      for(let j=0; j < board[i].length; j++){
+        if(board[i][j] === 2048)
+          return true;
+      }
+    }
+    return false;
 }
 
 const gameLost = (board) => {
-
+  const upBoard = Board(board, moveUp());
+  const rightBoard = Board(board, moveRight());
+  const downBoard = Board(board, moveDown());
+  const leftBoard = Board(board, moveLeft());
+  if(!distinctBoard(upBoard.present, rightBoard.present) &&
+      !distinctBoard(upBoard.present, downBoard.present) &&
+      !distinctBoard(upBoard.present, leftBoard.present)){
+        return true;
+      }
+  return false;
 }
 
 const App = (state = 0, action) => {
@@ -30,27 +48,33 @@ const App = (state = 0, action) => {
   }
   const newBoard = Board(state.Board, action);
 
+  let gameWin = gameWon(newBoard.present);
+  let gameLose = gameLost(newBoard);
+
   let newNotifications;
-  switch(action.type){
-    case 'CONTINUE_GAME':
-      newNotifications = {...state.notifications,
-                      victoryAcknowledged: true}
-      break;
-    case 'NEW_GAME':
-      newNotifications = defaultNotifications;
-      break;
-    case 'LOSE_GAME':
-      newNotifications = {...state.notifications,
-                          loss: true};
-      break;
-    case 'WIN_GAME':
-      newNotifications = {...state.notifications,
-                        victory: true};
-      break;
-    default:
-      newNotifications = {...state.notifications};
-      break;
+  if(gameLose){
+    newNotifications = {...state.notifications,
+                        loss: true};
   }
+  else if(gameWin){
+    newNotifications = {...state.notifications,
+                      victory: true};
+  }
+  else{
+    switch(action.type){
+      case 'CONTINUE_GAME':
+        newNotifications = {...state.notifications,
+                        victoryAcknowledged: true}
+        break;
+      case 'NEW_GAME':
+        newNotifications = defaultNotifications;
+        break;
+      default:
+        newNotifications = {...state.notifications};
+        break;
+    }
+  }
+
 
 //  const newNotifications = Notifications(state.Notifications, action);
   const newState = {...state,
