@@ -5,3 +5,4 @@ import { ActionCreators as UndoActionCreators } from 'redux-undo'
 
 export const undo = () => UndoActionCreators.undo()
 export const redo = () => UndoActionCreators.redo()
+export const undoAmount = (x) => UndoActionCreators.jumpToPast(x);

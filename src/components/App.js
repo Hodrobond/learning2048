@@ -49,7 +49,8 @@ class App extends Component{
         return (
             <div>
                 <Board board={this.props.App.Board}/>
-                <Notifications Notification={this.props.App.Notifications}/>
+                <Notifications Notification={this.props.App.Notifications}
+                  pastLength={this.props.App.Board.past.length}/>
                 <History/>
             </div>
         )
