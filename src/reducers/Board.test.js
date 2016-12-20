@@ -146,3 +146,20 @@ it('AddTile', () => {
   });
   expect(added.present).toEqual(solution);
 })
+
+it('AddTile - refuse duplicate', () => {
+  let test = [[0,0,0,0],
+            [0,0,2,0],
+            [0,0,0,0],
+            [0,0,0,0]];
+  let sampleBoard = {
+    ...historyTemplate,
+    present:test
+  }
+  const added = Board(sampleBoard, {
+    type:'ADD_TILE',
+    index: [1,2],
+    value: 4
+  });
+  expect(added.present).toEqual(test);  
+})
