@@ -3,7 +3,9 @@
  */
 import {combineReducers} from 'redux'
 import App from './App'
+import Board from './Board'
 
 export default combineReducers({
-    App
+    App,
+    Board
 })

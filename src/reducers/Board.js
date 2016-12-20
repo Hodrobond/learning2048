@@ -23,11 +23,10 @@ const Board = (state = 0, action) => {
         return mergeBoardLeft(state);
       case 'MERGE_RIGHT':
         return mergeBoardRight(state);
-
-        case 'NEW_GAME':
-            return createBoard();
-        default:
-            return state;
+      case 'NEW_GAME':
+          return createBoard();
+      default:
+          return state;
     }
 }
 
@@ -58,31 +57,6 @@ function getNewTileValue(){
         if(toPopulate[index] === true)
             return Math.pow(2, toPopulate.length - index)
     }
-}
-
-function move(board, direction){
-    //0: up, 1: right, 2: down, 3: left
-    var b;
-    switch(direction){
-        case 0:
-            b = mergeBoardUp(board);
-            break;
-        case 1:
-            b = mergeBoardRight(board);
-            break;
-        case 2:
-            b = mergeBoardDown(board);
-            break;
-        case 3:
-            b = mergeBoardLeft(board);
-            break;
-        default:
-            b = board.map(x => x);
-    }
-    if(distinctBoard(board, b)){
-        b = addNewTile(b);
-    }
-    return b;
 }
 
 function addNewTile(board){

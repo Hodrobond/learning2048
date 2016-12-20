@@ -1,10 +1,6 @@
 /**
  * Created by adam.kazberuk on 12/6/2016.
  */
-import Board from './Board'
-import {distinctBoard} from '../utility/Board'
-import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft} from '../actions/MovementButtons'
-
 const defaultNotifications = {
       loss: false,
       victory: false,
@@ -13,43 +9,16 @@ const defaultNotifications = {
 
 const init = (state, action) => {
  return {
-         Board: Board(state,action),
          Notifications: defaultNotifications
        }
-}
-
-const gameWon = (board) => {
-    console.log(board);
-    for(let i=0; i < board.length; i++){
-      for(let j=0; j < board[i].length; j++){
-        if(board[i][j] === 2048)
-          return true;
-      }
-    }
-    return false;
-}
-
-const gameLost = (board) => {
-  const upBoard = Board(board, handleMoveUp());
-  const rightBoard = Board(board, handleMoveRight());
-  const downBoard = Board(board, handleMoveDown());
-  const leftBoard = Board(board, handleMoveLeft());
-  if(!distinctBoard(upBoard.present, rightBoard.present) &&
-      !distinctBoard(upBoard.present, downBoard.present) &&
-      !distinctBoard(upBoard.present, leftBoard.present)){
-        return true;
-      }
-  return false;
 }
 
 const App = (state = 0, action) => {
   if(state === 0 || action === 'NEW_GAME'){
     init(0, action);
   }
-  const newBoard = Board(state.Board, action);
-
-  let gameWin = gameWon(newBoard.present);
-  let gameLose = gameLost(newBoard);
+  let gameWin = false//gameWon(newBoard.present);
+  let gameLose = false//gameLost(newBoard);
 
   let newNotifications;
   if(gameLose){
@@ -78,7 +47,6 @@ const App = (state = 0, action) => {
 
 //  const newNotifications = Notifications(state.Notifications, action);
   const newState = {...state,
-                    Board: newBoard,
                     Notifications: newNotifications};
   return newState;
 }

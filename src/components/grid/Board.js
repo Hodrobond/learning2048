@@ -23,7 +23,7 @@ const Board = (props, {store}) => {
 
 const mapStateToProps = (state) => {
     return {
-        Board: state.App.Board
+        Board: state.Board
     }
 }
 

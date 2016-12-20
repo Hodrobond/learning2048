@@ -6,6 +6,7 @@ export const handleMoveUp = () => {
     dispatch({type:'ROTATE_RIGHT'});
     dispatch({type:'MERGE_RIGHT'});
     dispatch({type:'ROTATE_LEFT'});
+    console.log(getState);
   }
 }
 

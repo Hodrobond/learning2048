@@ -32,7 +32,7 @@ class MovementButtons extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        Board: state.App.Board.present
+        Board: state.Board.present
     }
 }
 
