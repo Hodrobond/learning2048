@@ -15,10 +15,14 @@ const Board = (state = 0, action) => {
         return createBoard();
     }
     switch (action.type) {
-      case 'ROTATE_LEFT':
-        return rotateBoardLeft(state);
-      case 'ROTATE_RIGHT':
-        return rotateBoardRight(state);
+      case 'MERGE_UP':
+        const upRotatedLeft = rotateBoardLeft(state);
+        const upMerged = mergeBoardLeft(upRotatedLeft);
+        return rotateBoardRight(upMerged);
+      case 'MERGE_DOWN':
+        const downRotatedLeft = rotateBoardLeft(state);
+        const downMerged = mergeBoardRight(downRotatedLeft);
+        return rotateBoardRight(downMerged);
       case 'MERGE_LEFT':
         return mergeBoardLeft(state);
       case 'MERGE_RIGHT':

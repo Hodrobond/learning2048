@@ -3,9 +3,7 @@
  */
 export const handleMoveUp = () => {
   return(dispatch, getState) => {
-    dispatch({type:'ROTATE_RIGHT'});
-    dispatch({type:'MERGE_RIGHT'});
-    dispatch({type:'ROTATE_LEFT'});
+    dispatch({type:'MERGE_UP'});
     console.log(getState);
   }
 }
@@ -18,9 +16,7 @@ export const handleMoveRight = () => {
 
 export const handleMoveDown = () => {
   return(dispatch, getState) => {
-    dispatch({type:'ROTATE_RIGHT'});
-    dispatch({type:'MERGE_LEFT'});
-    dispatch({type:'ROTATE_LEFT'});
+    dispatch({type:'MERGE_DOWN'});
   }
 }
 
