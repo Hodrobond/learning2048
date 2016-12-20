@@ -15,33 +15,28 @@ const init = (state, action) => {
 
 const App = (state = 0, action) => {
   if(state === 0 || action === 'NEW_GAME'){
-    init(0, action);
+    return init(0, action);
   }
-  let gameWin = false//gameWon(newBoard.present);
-  let gameLose = false//gameLost(newBoard);
-
   let newNotifications;
-  if(gameLose){
-    newNotifications = {...state.notifications,
-                        loss: true};
-  }
-  else if(gameWin){
-    newNotifications = {...state.notifications,
-                      victory: true};
-  }
-  else{
-    switch(action.type){
-      case 'CONTINUE_GAME':
-        newNotifications = {...state.notifications,
-                        victoryAcknowledged: true}
-        break;
-      case 'NEW_GAME':
-        newNotifications = defaultNotifications;
-        break;
-      default:
-        newNotifications = {...state.notifications};
-        break;
-    }
+  switch(action.type){
+    case 'WIN_GAME':
+      newNotifications = {...state.Notifications,
+                      victory: true}
+      break;
+    case 'LOSE_GAME':
+      newNotifications = {...state.Notifications,
+                      loss: true}
+      break;
+    case 'CONTINUE_GAME':
+      newNotifications = {...state.Notifications,
+                      victoryAcknowledged: true}
+      break;
+    case 'NEW_GAME':
+      newNotifications = defaultNotifications;
+      break;
+    default:
+      newNotifications = {...state.Notifications};
+      break;
   }
 
 

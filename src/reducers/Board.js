@@ -16,13 +16,9 @@ const Board = (state = 0, action) => {
     }
     switch (action.type) {
       case 'MERGE_UP':
-        const upRotatedLeft = rotateBoardLeft(state);
-        const upMerged = mergeBoardLeft(upRotatedLeft);
-        return rotateBoardRight(upMerged);
+        return mergeBoardUp(state);
       case 'MERGE_DOWN':
-        const downRotatedLeft = rotateBoardLeft(state);
-        const downMerged = mergeBoardRight(downRotatedLeft);
-        return rotateBoardRight(downMerged);
+        return mergeBoardDown(state);
       case 'MERGE_LEFT':
         return mergeBoardLeft(state);
       case 'MERGE_RIGHT':
@@ -67,18 +63,6 @@ function getNewTileValue(){
     for(let index = 0; index < toPopulate.length; index++){
         if(toPopulate[index] === true)
             return Math.pow(2, toPopulate.length - index)
-    }
-}
-
-function addNewTile(board){
-    var b = board.map(x => x);
-    while(true){
-        var randX = Math.floor(Math.random()*4);
-        var randY = Math.floor(Math.random()*4);
-        if(b[randX][randY] === 0){
-            b[randX][randY] = getNewTileValue();
-            return b;
-        }
     }
 }
 

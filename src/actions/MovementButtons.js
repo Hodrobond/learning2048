@@ -1,7 +1,7 @@
 /**
  * Created by adam.kazberuk on 12/14/2016.
  */
-import {distinctBoard, getEmptyIndexes} from '../utility/Board'
+import {distinctBoard, getEmptyIndexes, gameWon, gameLost} from '../utility/Board'
 
 const randomFromArray = (arr) => {
   return arr[Math.floor((Math.random() * arr.length))];
@@ -30,12 +30,21 @@ const getNewTileDispatch = (board) => {
 
 const handleMove = (moveType) => {
   return(dispatch, getState) => {
-    var initial = getState().Board.present;
+    let initial = getState().Board.present;
     dispatch(moveType);
-    var post = getState().Board.present;
-    if(distinctBoard(initial, post)){
+    let post = getState().Board.present;
+    if(distinctBoard(initial, post)
+        && getEmptyIndexes(post).length > 0){
       dispatch(getNewTileDispatch(post));
     }//if(distinctBoard(initial, post))
+    let board = getState().Board.present;
+    if(gameWon(board)){
+      dispatch({type:'WIN_GAME'});
+    }
+    if(gameLost(board)){
+      dispatch({type:'LOSE_GAME'})
+    }
+
   }
 }
 
