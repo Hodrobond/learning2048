@@ -17,11 +17,11 @@ const getNewTileValue = () => {
     }
 }
 
-export const handleMoveUp = () => {
+const handleMove = (moveType) => {
   return(dispatch, getState) => {
-    let initial = getState().Board.present;
-    dispatch({type:'MERGE_UP'});
-    let post = getState().Board.present;
+    var initial = getState().Board.present;
+    dispatch(moveType);
+    var post = getState().Board.present;
     if(distinctBoard(initial, post)){
       //add tile
       var indicies = getEmptyIndexes(post);
@@ -32,27 +32,31 @@ export const handleMoveUp = () => {
         index: toFill,
         value: value
       })
-    }
-
-
+    }//if(distinctBoard(initial, post))
   }
+}
+
+export const handleMoveUp = () => {
+  return(dispatch, getState) => {
+    handleMove({type:'MERGE_UP'})(dispatch, getState);
+  }//return(dispatch, getState)
 }
 
 export const handleMoveRight = () => {
   return(dispatch, getState) => {
-    dispatch({type:'MERGE_RIGHT'})
+    handleMove({type:'MERGE_RIGHT'})(dispatch, getState);
   }
 }
 
 export const handleMoveDown = () => {
   return(dispatch, getState) => {
-    dispatch({type:'MERGE_DOWN'});
+    handleMove({type:'MERGE_DOWN'})(dispatch, getState);
   }
 }
 
 export const handleMoveLeft = () => {
   return(dispatch,getState) => {
-    dispatch({type:'MERGE_LEFT'});
+    handleMove({type:'MERGE_LEFT'})(dispatch, getState);
   }
 }
 
