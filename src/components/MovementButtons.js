@@ -5,19 +5,19 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
-import {moveUp, moveRight, moveDown, moveLeft, newGame, winGame, loseGame} from '../actions/MovementButtons'
+import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame, loseGame} from '../actions/MovementButtons'
 
 class MovementButtons extends Component {
     render(){
         return(
             <div>
-                <button onClick={() => this.props.moveUp()}>Up</button>
+                <button onClick={() => this.props.handleMoveUp(this.props.Board)}>Up</button>
                 {' '}
-                <button onClick={() => this.props.moveRight()}>Right</button>
+                <button onClick={() => this.props.handleMoveRight(this.props.Board)}>Right</button>
                 {' '}
-                <button onClick={() => this.props.moveDown()}>Down</button>
+                <button onClick={() => this.props.handleMoveDown(this.props.Board)}>Down</button>
                 {' '}
-                <button onClick={() => this.props.moveLeft()}>Left</button>
+                <button onClick={() => this.props.handleMoveLeft(this.props.Board)}>Left</button>
                 {' '}
                 <button onClick={() => this.props.newGame()}>New Game</button>
                 {' '}
@@ -32,12 +32,12 @@ class MovementButtons extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        Notification: state.Notifications
+        Board: state.App.Board.present
     }
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ moveUp, moveRight, moveDown, moveLeft, newGame, winGame, loseGame}, dispatch);
+    return bindActionCreators({ handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame, loseGame}, dispatch);
 }
 
 

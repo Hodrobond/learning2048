@@ -4,19 +4,26 @@
 import undoable from 'redux-undo'
 import {distinctBoard, distinctBoardFilter} from '../utility/Board'
 
+/*
+mergeBoard
+  -rotateLeft/Right
+  -mergeLeft/Right
+addNewTile
+*/
 const Board = (state = 0, action) => {
     if(state === 0){
         return createBoard();
     }
     switch (action.type) {
-        case 'MOVE_UP':
-            return move(state, 0);
-        case 'MOVE_RIGHT':
-            return move(state, 1);
-        case 'MOVE_DOWN':
-            return move(state, 2);
-        case 'MOVE_LEFT':
-            return move(state, 3);
+      case 'ROTATE_LEFT':
+        return rotateBoardLeft(state);
+      case 'ROTATE_RIGHT':
+        return rotateBoardRight(state);
+      case 'MERGE_LEFT':
+        return mergeBoardLeft(state);
+      case 'MERGE_RIGHT':
+        return mergeBoardRight(state);
+
         case 'NEW_GAME':
             return createBoard();
         default:

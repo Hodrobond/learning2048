@@ -16,7 +16,7 @@ const Board = (props, {store}) => {
                     )}
                 </tbody>
             </table>
-            <MovementButtons/>
+            <MovementButtons Board={props.Board.present}/>
         </div>
     )
 }
