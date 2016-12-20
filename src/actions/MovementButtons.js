@@ -1,10 +1,19 @@
 /**
  * Created by adam.kazberuk on 12/14/2016.
  */
+import {distinctBoard} from '../utility/Board'
+
 export const handleMoveUp = () => {
   return(dispatch, getState) => {
+    let initial = getState().Board.present;
     dispatch({type:'MERGE_UP'});
-    console.log(getState);
+    let post = getState().Board.present;
+    if(distinctBoard(initial, post)){
+      //add tile
+      console.log("distinct");
+    }
+
+
   }
 }
 

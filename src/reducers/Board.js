@@ -2,7 +2,7 @@
  * Created by adam.kazberuk on 12/5/2016.
  */
 import undoable from 'redux-undo'
-import {distinctBoard, distinctBoardFilter} from '../utility/Board'
+import {distinctBoardFilter} from '../utility/Board'
 
 /*
 mergeBoard
