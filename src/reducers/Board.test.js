@@ -1,6 +1,5 @@
 import Board from './Board'
 
-
 it('RotateRight', () => {
   let sampleBoard = {
     past: [],

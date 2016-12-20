@@ -3,7 +3,7 @@
  */
 import Board from './Board'
 import {distinctBoard} from '../utility/Board'
-import {moveUp, moveRight, moveDown, moveLeft} from '../actions/MovementButtons'
+import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft} from '../actions/MovementButtons'
 
 const defaultNotifications = {
       loss: false,
@@ -30,10 +30,10 @@ const gameWon = (board) => {
 }
 
 const gameLost = (board) => {
-  const upBoard = Board(board, moveUp());
-  const rightBoard = Board(board, moveRight());
-  const downBoard = Board(board, moveDown());
-  const leftBoard = Board(board, moveLeft());
+  const upBoard = Board(board, handleMoveUp());
+  const rightBoard = Board(board, handleMoveRight());
+  const downBoard = Board(board, handleMoveDown());
+  const leftBoard = Board(board, handleMoveLeft());
   if(!distinctBoard(upBoard.present, rightBoard.present) &&
       !distinctBoard(upBoard.present, downBoard.present) &&
       !distinctBoard(upBoard.present, leftBoard.present)){

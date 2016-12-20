@@ -1,26 +1,6 @@
 /**
  * Created by adam.kazberuk on 12/14/2016.
  */
-export const moveRight = (board) => {
-  console.log(board);
-  return { type: "MOVE_RIGHT"};
-}
-
-export const moveDown = (board) => {
-  console.log(board);
-  return { type: "MOVE_DOWN"}
-}
-
-export const moveLeft = (board) => {
-  console.log(board);
-  return { type: "MERGE_LEFT"}
-}
-
-export const moveUp = (board) => {
-  console.log(board);
-  return { type: "MOVE_UP"}
-}
-
 export const handleMoveUp = () => {
   return(dispatch, getState) => {
     dispatch({type:'ROTATE_RIGHT'});

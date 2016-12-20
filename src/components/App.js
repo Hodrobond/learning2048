@@ -8,7 +8,7 @@ import Board from './grid/Board'
 import Notifications from "./notifications/Notifications"
 import History from "./history/History"
 
-import {moveUp, moveRight, moveDown, moveLeft, newGame, winGame} from '../actions/MovementButtons'
+import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame} from '../actions/MovementButtons'
 
 class App extends Component{
     componentDidMount() {
@@ -26,18 +26,18 @@ class App extends Component{
         switch(code) {
             case 37:
                 // Key left.
-                this.props.moveLeft()
+                this.props.handleMoveLeft()
                 break;
             case 38:
-                this.props.moveUp()
+                this.props.handleMoveUp()
                 // Key up.
                 break;
             case 39:
-                this.props.moveRight()
+                this.props.handleMoveRight()
                 // Key right.
                 break;
             case 40:
-                this.props.moveDown()
+                this.props.handleMoveDown()
                 // Key down.
                 break;
             default:
@@ -64,7 +64,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ moveUp, moveRight, moveDown, moveLeft, newGame, winGame}, dispatch);
+    return bindActionCreators({ handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame}, dispatch);
 }
 
 
