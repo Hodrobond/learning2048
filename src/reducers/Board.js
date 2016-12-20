@@ -29,6 +29,10 @@ const Board = (state = 0, action) => {
         return mergeBoardRight(state);
       case 'NEW_GAME':
           return createBoard();
+      case 'ADD_TILE':
+          var newState = state.slice();
+          newState[action.index[0]][action.index[1]]=action.value;
+          return newState;
       default:
           return state;
     }

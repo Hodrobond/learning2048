@@ -126,3 +126,23 @@ it('MergeRight - shift', () => {
   const merged = Board(sampleBoard, {type:'MERGE_RIGHT'});
   expect(merged.present).toEqual(solution);
 })
+
+it('AddTile', () => {
+  let sampleBoard = {
+    ...historyTemplate,
+    present:[[0,0,0,0],
+              [0,0,0,0],
+              [0,0,0,0],
+              [0,0,0,0]]
+  }
+  let solution = [[0,0,0,0],
+                  [0,0,2,0],
+                  [0,0,0,0],
+                  [0,0,0,0]]
+  const added = Board(sampleBoard, {
+    type:'ADD_TILE',
+    index: [1,2],
+    value: 2
+  });
+  expect(added.present).toEqual(solution);
+})

@@ -1,7 +1,21 @@
 /**
  * Created by adam.kazberuk on 12/14/2016.
  */
-import {distinctBoard} from '../utility/Board'
+import {distinctBoard, getEmptyIndexes} from '../utility/Board'
+
+const randomFromArray = (arr) => {
+  return arr[Math.floor((Math.random() * arr.length))];
+}
+
+const getNewTileValue = () => {
+    var sample = Math.random();
+    var numberRate = [0.0125, 0.1, 1];
+    var toPopulate = numberRate.map(x => {return (sample < x)});
+    for(let index = 0; index < toPopulate.length; index++){
+        if(toPopulate[index] === true)
+            return Math.pow(2, toPopulate.length - index)
+    }
+}
 
 export const handleMoveUp = () => {
   return(dispatch, getState) => {
@@ -10,7 +24,14 @@ export const handleMoveUp = () => {
     let post = getState().Board.present;
     if(distinctBoard(initial, post)){
       //add tile
-      console.log("distinct");
+      var indicies = getEmptyIndexes(post);
+      var toFill = randomFromArray(indicies);
+      var value = getNewTileValue();
+      dispatch({
+        type:'ADD_TILE',
+        index: toFill,
+        value: value
+      })
     }
 
 
