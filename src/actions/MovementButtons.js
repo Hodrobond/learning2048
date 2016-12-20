@@ -17,21 +17,24 @@ const getNewTileValue = () => {
     }
 }
 
+const getNewTileDispatch = (board) => {
+  var indicies = getEmptyIndexes(board);
+  var toFill = randomFromArray(indicies);
+  var value = getNewTileValue();
+  return {
+    type: 'ADD_TILE',
+    index: toFill,
+    value: value
+  }
+}
+
 const handleMove = (moveType) => {
   return(dispatch, getState) => {
     var initial = getState().Board.present;
     dispatch(moveType);
     var post = getState().Board.present;
     if(distinctBoard(initial, post)){
-      //add tile
-      var indicies = getEmptyIndexes(post);
-      var toFill = randomFromArray(indicies);
-      var value = getNewTileValue();
-      dispatch({
-        type:'ADD_TILE',
-        index: toFill,
-        value: value
-      })
+      dispatch(getNewTileDispatch(post));
     }//if(distinctBoard(initial, post))
   }
 }
