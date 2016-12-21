@@ -30,10 +30,7 @@ const getNewTileDispatch = (board) => {
 
 export const initializeBoard = () => {
   return(dispatch, getState) =>{
-    let board = [[0,0,0,0],
-                [0,0,0,0],
-                [0,0,0,0],
-                [0,0,0,0]]
+    let board = getState().Board.present;
     let minTiles = 2;
     let maxTiles = 5;
     let numTiles = Math.floor(Math.random() * (maxTiles-minTiles+1))+minTiles;

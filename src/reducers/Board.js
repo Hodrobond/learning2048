@@ -41,33 +41,7 @@ function createBoard() {
   return [[0,0,0,0],
           [0,0,0,0],
           [0,0,0,0],
-          [0,0,0,0]]
-    var board = [];//initialize array
-    var boardSize = 4;
-    var popRate = 0.2;
-    for (var i = 0 ; i < boardSize; i++) {
-        board[i] = [];//initialize inner array
-        for (var j = 0; j < boardSize; j++) {//i++ = j++
-            if(Math.random() < popRate){ //20% chance
-                board[i][j] = getNewTileValue();
-            }
-            else{
-                board[i][j] = 0;
-            }
-        }
-    }
-    return board;
-}
-
-//adapt an array for rates instead of adding else ifs
-function getNewTileValue(){
-    var sample = Math.random();
-    var numberRate = [0.0125, 0.1, 1];
-    var toPopulate = numberRate.map(x => {return (sample < x)});
-    for(let index = 0; index < toPopulate.length; index++){
-        if(toPopulate[index] === true)
-            return Math.pow(2, toPopulate.length - index)
-    }
+          [0,0,0,0]];
 }
 
 function shiftRowRight(a){
