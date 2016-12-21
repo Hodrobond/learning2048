@@ -4,7 +4,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
-import Board from './grid/Board'
+import Board from './Board/Board'
 import Notifications from "./notifications/Notifications"
 import DevActions from './DevActions'
 
