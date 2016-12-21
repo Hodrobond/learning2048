@@ -8,12 +8,11 @@ import Board from './grid/Board'
 import Notifications from "./notifications/Notifications"
 import History from "./history/History"
 
-import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame,initializeBoard} from '../actions/MovementButtons'
+import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame} from '../actions/MovementButtons'
 
 class App extends Component{
     componentDidMount() {
         document.onkeydown = this.handleKeyDown.bind(this);
-        this.props.initializeBoard();
     }
 
     componentWillUnmount(){
@@ -49,7 +48,7 @@ class App extends Component{
     render(){
         return (
             <div>
-                <Board board={this.props.Board}/>
+                <Board/>
                 <Notifications Notification={this.props.App.Notifications}
                   pastLength={this.props.Board.past.length}/>
                 <History/>
@@ -66,7 +65,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame,initializeBoard}, dispatch);
+    return bindActionCreators({ handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame}, dispatch);
 }
 
 
