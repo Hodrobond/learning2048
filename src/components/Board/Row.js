@@ -5,11 +5,11 @@ import React, { PropTypes } from 'react'
 import Tile from './Tile'
 
 const Row= props => (
-    <tr>{
+    <div className='boardRow'>{
         props.value.map((x, i) =>
             <Tile number={x} key={i}/>
         )
-    }</tr>
+    }</div>
 )
 
 Row.propTypes = {

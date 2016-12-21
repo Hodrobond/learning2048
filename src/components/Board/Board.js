@@ -8,6 +8,8 @@ import Row from "./Row"
 import MovementButtons from '../MovementButtons'
 import { initializeBoard } from '../../actions/MovementButtons'
 
+import './BoardStyle.css'
+
 class Board extends Component {
   componentDidMount() {
       this.props.initializeBoard();
@@ -20,13 +22,11 @@ class Board extends Component {
   render(){
     return (
         <div>
-            <table>
-                <tbody>
-                    {this.props.Board.present.map((x, i) =>
-                        <Row value={x} key={i}/>
-                    )}
-                </tbody>
-            </table>
+            <div className='board'>
+              {this.props.Board.present.map((x, i) =>
+                  <Row value={x} key={i}/>
+              )}
+            </div>
             <MovementButtons Board={this.props.Board.present}/>
         </div>
     )

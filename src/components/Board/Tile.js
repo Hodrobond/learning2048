@@ -3,10 +3,12 @@
  */
 import React, { PropTypes, Component } from 'react'
 
+import './BoardStyle.css'
+
 class Tile extends Component{
   render(){
     return(
-      <td>{this.props.number}</td>
+      <div className={"tile tile-"+this.props.number}>{this.props.number}</div>
     )
   }
 }
