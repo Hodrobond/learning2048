@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import Board from './grid/Board'
 import Notifications from "./notifications/Notifications"
-import History from "./history/History"
+import DevActions from './DevActions'
 
 import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame} from '../actions/MovementButtons'
 
@@ -51,7 +51,7 @@ class App extends Component{
                 <Board/>
                 <Notifications Notification={this.props.App.Notifications}
                   pastLength={this.props.Board.past.length}/>
-                <History/>
+                <DevActions/>
             </div>
         )
     }

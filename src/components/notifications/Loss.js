@@ -12,8 +12,8 @@ class Loss extends Component{
         return(
         <div>
             <h1>Apologies, but it appears you are unable to continue</h1>
-            <button onClick={() => this.props.newGame()}>NEW GAME</button>
             <p>Would you like to retry your past 5 moves?</p>
+            <button onClick={() => this.props.newGame()}>NEW GAME</button>
             <button onClick={() => this.props.undoAmount(this.props.pastLength-5)}>Undo</button>
         </div>
         )

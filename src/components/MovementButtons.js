@@ -5,7 +5,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
-import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame, loseGame} from '../actions/MovementButtons'
+import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft} from '../actions/MovementButtons'
 
 class MovementButtons extends Component {
     render(){
@@ -18,13 +18,6 @@ class MovementButtons extends Component {
                 <button onClick={() => this.props.handleMoveDown(this.props.Board)}>Down</button>
                 {' '}
                 <button onClick={() => this.props.handleMoveLeft(this.props.Board)}>Left</button>
-                {' '}
-                <button onClick={() => this.props.newGame()}>New Game</button>
-                {' '}
-                <button onClick={() => this.props.winGame()}>Win Game</button>
-                {' '}
-                <button onClick={() => this.props.loseGame()}>Lose Game</button>
-                {' '}
             </div>
             )
     }
@@ -37,7 +30,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame, loseGame}, dispatch);
+    return bindActionCreators({ handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft}, dispatch);
 }
 
 
