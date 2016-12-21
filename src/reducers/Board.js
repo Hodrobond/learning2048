@@ -27,11 +27,8 @@ const Board = (state = 0, action) => {
           return createBoard();
       case 'ADD_TILE':
           var newState = state.slice();
-          if(newState[action.index[0]][action.index[1]] === 0){
-            newState[action.index[0]][action.index[1]]=action.value;
-            return newState;
-          }
-          return state;
+          newState[action.x][action.y]=action.value;
+          return newState;
       default:
           return state;
     }

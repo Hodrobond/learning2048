@@ -23,7 +23,8 @@ const getNewTileDispatch = (board) => {
   var value = getNewTileValue();
   return {
     type: 'ADD_TILE',
-    index: toFill,
+    x: toFill[0],
+    y: toFill[1],
     value: value
   }
 }
