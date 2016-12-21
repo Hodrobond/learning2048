@@ -38,6 +38,10 @@ const Board = (state = 0, action) => {
 }
 
 function createBoard() {
+  return [[0,0,0,0],
+          [0,0,0,0],
+          [0,0,0,0],
+          [0,0,0,0]]
     var board = [];//initialize array
     var boardSize = 4;
     var popRate = 0.2;

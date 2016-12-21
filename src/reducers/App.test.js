@@ -10,6 +10,14 @@ const defaultState = {
   Notifications: defaultNotifications
 };
 
+it('Initialize', () => {
+  const initialized = App(0, {type:'NEW_GAME'});
+  const solution = {
+    Notifications: defaultNotifications
+  };
+  expect(initialized).toEqual(solution);
+})
+
 it('Win Game', () => {
     const wonStatus = App(defaultState, {type:'WIN_GAME'});
     const solution = {

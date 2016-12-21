@@ -28,6 +28,21 @@ const getNewTileDispatch = (board) => {
   }
 }
 
+export const initializeBoard = () => {
+  return(dispatch, getState) =>{
+    let board = [[0,0,0,0],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,0,0,0]]
+    let minTiles = 2;
+    let maxTiles = 5;
+    let numTiles = Math.floor(Math.random() * (maxTiles-minTiles+1))+minTiles;
+    for(let i=0;i<numTiles;i++){
+      dispatch(getNewTileDispatch(board));
+    }
+  }
+}
+
 const handleMove = (moveType) => {
   return(dispatch, getState) => {
     let initial = getState().Board.present;
