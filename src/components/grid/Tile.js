@@ -1,11 +1,15 @@
 /**
  * Created by adam.kazberuk on 12/6/2016.
  */
-import React, { PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
 
-const Tile = props => (
-    <td>{props.number}</td>
-)
+class Tile extends Component{
+  render(){
+    return(
+      <td>{this.props.number}</td>
+    )
+  }
+}
 
 Tile.propTypes = {
     number: PropTypes.number
