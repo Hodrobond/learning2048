@@ -10,6 +10,8 @@ import DevActions from './DevActions'
 
 import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame} from '../actions/MovementButtons'
 
+import './AppStyle.css'
+
 class App extends Component{
     componentDidMount() {
         document.onkeydown = this.handleKeyDown.bind(this);
@@ -47,7 +49,7 @@ class App extends Component{
 
     render(){
         return (
-            <div>
+            <div className='app'>
                 <Board/>
                 <Notifications Notification={this.props.App.Notifications}
                   pastLength={this.props.Board.past.length}/>
