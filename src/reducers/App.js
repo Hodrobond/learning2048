@@ -2,7 +2,6 @@
  * Created by adam.kazberuk on 12/6/2016.
  */
 import undoable from 'redux-undo'
-import {distinctBoardFilter} from '../utility/Board'
 
 const defaultNotifications = {
       loss: false,
