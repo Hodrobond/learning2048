@@ -1,6 +1,13 @@
 .board{
   background: #bbada0;
   display: inline-block;
+  position: relative;
+  z-index:2;
+}
+
+.boardContainer{
+  display: inline-block;
+
 }
 
 .boardRow{

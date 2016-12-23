@@ -49,11 +49,13 @@ class App extends Component{
 
     render(){
         return (
-            <div className='app'>
-                <Board/>
-                <Notifications Notification={this.props.App.Notifications}
-                  pastLength={this.props.Board.past.length}/>
-                <DevActions/>
+            <div>            
+              <div className='app'>
+                  <Board/>
+                  <Notifications Notification={this.props.App.Notifications}
+                    pastLength={this.props.Board.past.length}/>
+              </div>
+              <DevActions/>
             </div>
         )
     }

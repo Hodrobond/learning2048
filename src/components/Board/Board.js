@@ -21,7 +21,7 @@ class Board extends Component {
 
   render(){
     return (
-        <div>
+        <div className='boardContainer'>
             <div className='board'>
               {this.props.Board.present.map((x, i) =>
                   <Row value={x} key={i}/>
