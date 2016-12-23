@@ -13,7 +13,7 @@ class Loss extends Component{
         return(
         <div>
           <Modal
-            isOpen={this.props.App.Notifications.loss}
+            isOpen={this.props.App.present.Notifications.loss}
             contentLabel="Modal"
           >
             <h1>Apologies, but it appears you are unable to continue</h1>

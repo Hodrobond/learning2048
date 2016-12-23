@@ -1,6 +1,9 @@
 /**
  * Created by adam.kazberuk on 12/6/2016.
  */
+import undoable from 'redux-undo'
+import {distinctBoardFilter} from '../utility/Board'
+
 const defaultNotifications = {
       loss: false,
       victory: false,
@@ -46,4 +49,14 @@ const App = (state = 0, action) => {
   return newState;
 }
 
-export default App;
+
+
+const distinctAppFilter = (action, currentState, previousState) => {
+  return true;
+}
+
+const undoableApp = undoable(App,
+    {filter: distinctAppFilter}
+)
+
+export default undoableApp;
