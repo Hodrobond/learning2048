@@ -141,7 +141,8 @@ it('AddTile', () => {
                   [0,0,0,0]]
   const added = Board(sampleBoard, {
     type:'ADD_TILE',
-    index: [1,2],
+    x:1,
+    y:2,
     value: 2
   });
   expect(added.present).toEqual(solution);
@@ -158,8 +159,9 @@ it('AddTile - refuse duplicate', () => {
   }
   const added = Board(sampleBoard, {
     type:'ADD_TILE',
-    index: [1,2],
+    x:1,
+    y:2,
     value: 4
   });
-  expect(added.present).toEqual(test);  
+  expect(added.present).toEqual(test);
 })
