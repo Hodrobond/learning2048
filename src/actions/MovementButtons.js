@@ -90,6 +90,11 @@ export const handleMoveLeft = () => {
   }
 }
 
-export const newGame = () => ({ type: "NEW_GAME"})
+export const newGame = () => {
+  return(dispatch, getState) => {
+    dispatch({ type: "NEW_GAME"});
+    initializeBoard()(dispatch, getState);
+  }
+}
 export const winGame = () => ({ type: "WIN_GAME"})
 export const loseGame = () => ({ type: "LOSE_GAME"})
