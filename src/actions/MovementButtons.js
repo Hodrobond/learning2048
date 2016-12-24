@@ -2,6 +2,7 @@
  * Created by adam.kazberuk on 12/14/2016.
  */
 import {distinctBoard, getEmptyIndexes, gameWon, gameLost} from '../utility/Board'
+import {increment, incrementHigh} from './Score'
 
 const randomFromArray = (arr) => {
   return arr[Math.floor((Math.random() * arr.length))];
@@ -36,28 +37,32 @@ export const initializeBoard = () => {
     let maxTiles = 5;
     let numTiles = Math.floor(Math.random() * (maxTiles-minTiles+1))+minTiles;
     for(let i=0;i<numTiles;i++){
-      dispatch(getNewTileDispatch(board));
+      dispatch(getNewTileDispatch(board.board));
     }
   }
 }
+
 
 const handleMove = (moveType) => {
   return(dispatch, getState) => {
     let initial = getState().Board.present;
     dispatch(moveType);
     let post = getState().Board.present;
-    if(distinctBoard(initial, post)
-        && getEmptyIndexes(post).length > 0){
-      dispatch(getNewTileDispatch(post));
-    }//if(distinctBoard(initial, post))
-    let board = getState().Board.present;
-    if(gameWon(board)){
+    let score = getState().Score;
+    dispatch(increment(post.scoreIncrease));
+    if((score.currentScore + post.scoreIncrease) > score.highScore)
+      dispatch(incrementHigh(post.scoreIncrease));
+    if(gameWon(post.board)){
       dispatch({type:'WIN_GAME'});
     }
-    if(gameLost(board)){
+    if(gameLost(post.board)){
       dispatch({type:'LOSE_GAME'})
     }
-
+    post = getState().Board.present;
+    if(distinctBoard(initial.board, post.board)
+        && getEmptyIndexes(post.board).length > 0){
+      dispatch(getNewTileDispatch(post.board));
+    }//if(distinctBoard(initial, post))
   }
 }
 

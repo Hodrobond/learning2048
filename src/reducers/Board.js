@@ -16,29 +16,35 @@ const Board = (state = 0, action) => {
     }
     switch (action.type) {
       case 'MERGE_UP':
-        return mergeBoardUp(state);
+        return mergeBoardUp(state.board);
       case 'MERGE_DOWN':
-        return mergeBoardDown(state);
+        return mergeBoardDown(state.board);
       case 'MERGE_LEFT':
-        return mergeBoardLeft(state);
+        return mergeBoardLeft(state.board);
       case 'MERGE_RIGHT':
-        return mergeBoardRight(state);
+        return mergeBoardRight(state.board);
       case 'NEW_GAME':
           return createBoard();
       case 'ADD_TILE':
-          var newState = state.slice();
+          var newState = state.board.slice();
           newState[action.x][action.y]=action.value;
-          return newState;
+          return {
+            ...state,
+            board: newState
+          }
       default:
           return state;
     }
 }
 
 function createBoard() {
-  return [[0,0,0,0],
-          [0,0,0,0],
-          [0,0,0,0],
-          [0,0,0,0]];
+  return {
+    board: [[0,0,0,0],
+            [0,0,0,0],
+            [0,0,0,0],
+            [0,0,0,0]],
+    scoreIncrease: 0
+  };
 }
 
 function shiftRowRight(a){
@@ -74,17 +80,22 @@ function shiftRowLeft(a){
 function mergeBoardUp (board) {
     var b = rotateBoardRight(board);
     var c = mergeBoardRight(b);
-    var d = rotateBoardLeft(c);
-    return d;
+    var d = rotateBoardLeft(c.board);
+    return {
+      board:d,
+      scoreIncrease: c.scoreIncrease
+    }
 }
 
 function mergeBoardRight(board){
-    var b = board.map(row => {
-            var a = row.map(x => x);
+  let scoreIncrease = 0;
+  var b = board.map(row => {
+    var a = row.map(x => x);
     a = shiftRowRight(a);
     for(let i = a.length -1; i >= 0; i--){
         for(let j = i - 1; j >= 0; j--){
             if(a[j] && a[j] !== 0 && a[i] === a[j]){
+                scoreIncrease += a[i];
                 a[i] *= 2;
                 a[j] = 0;
                 a = shiftRowRight(a);
@@ -95,36 +106,47 @@ function mergeBoardRight(board){
         }//j
     }//i
     return a;
-})
-return b;
+  })
+  return {
+    board:b,
+    scoreIncrease: scoreIncrease
+  }
 }
 
 function mergeBoardDown(board) {
     var b = rotateBoardLeft(board);
     var c = mergeBoardRight(b);
-    var d = rotateBoardRight(c);
-    return d;
+    var d = rotateBoardRight(c.board);
+    return {
+      board: d,
+      scoreIncrease: c.scoreIncrease
+    }
 }
 
 function mergeBoardLeft (board){
-    let b = board.map(row => {
-            let a = row.map(x => x);
+  let scoreIncremented = 0;
+  let b = board.map(row => {
+    let a = row.map(x => x);
     a = shiftRowLeft(a);
     for(let i = 0; i < a.length; i++){
         for(let j = i + 1; j < a.length; j++){
-            if(a[j] && a[j] !== 0 && a[i] === a[j]){
-                a[i] *= 2;
-                a[j] = 0;
-                a = shiftRowLeft(a);
-                i++;
-            }
-            else if(a[j] !== 0)
-                break;
+          if(a[j] && a[j] !== 0 && a[i] === a[j]){
+            a[i] *= 2;
+            scoreIncremented += a[i];
+            a[j] = 0;
+            a = shiftRowLeft(a);
+            i++;
+          }
+          else if(a[j] !== 0)
+            break;
         }//j
     }//i
     return a;
-})
-return b;
+  })
+  return{
+    board: b,
+    scoreIncrease: scoreIncremented
+  }
 }
 
 function rotateBoardRight(board){

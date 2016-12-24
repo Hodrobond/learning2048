@@ -23,11 +23,11 @@ class Board extends Component {
     return (
         <div className='boardContainer'>
             <div className='board'>
-              {this.props.Board.present.map((x, i) =>
+              {this.props.Board.present.board.map((x, i) =>
                   <Row value={x} key={i}/>
               )}
             </div>
-            <MovementButtons Board={this.props.Board.present}/>
+            <MovementButtons Board={this.props.Board.present.board}/>
         </div>
     )
   }
