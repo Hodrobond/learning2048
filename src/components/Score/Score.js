@@ -5,6 +5,8 @@ import React, { Component} from 'react'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 
+import './Score.css'
+
 class Score extends Component {
   componentDidMount() {
     //probably putting effects for incrementing here? maybe?
@@ -17,10 +19,12 @@ class Score extends Component {
   render(){
     return (
         <div className='scoreContainer'>
-          <div className='currentScore'>
+          <div className='scoreBlock'>
+            <p>SCORE</p>
             <p>{this.props.Score.currentScore}</p>
           </div>
-          <div className='highScore'>
+          <div className='scoreBlock'>
+            <p>BEST</p>
             <p>{this.props.Score.highScore}</p>
           </div>
         </div>
