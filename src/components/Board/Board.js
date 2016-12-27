@@ -5,7 +5,6 @@ import React, { PropTypes, Component} from 'react'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import Row from "./Row"
-import MovementButtons from '../MovementButtons'
 import { initializeBoard } from '../../actions/MovementButtons'
 
 import './BoardStyle.css'
