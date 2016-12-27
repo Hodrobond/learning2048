@@ -95,8 +95,8 @@ function mergeBoardRight(board){
     for(let i = a.length -1; i >= 0; i--){
         for(let j = i - 1; j >= 0; j--){
             if(a[j] && a[j] !== 0 && a[i] === a[j]){
-                scoreIncrease += a[i];
                 a[i] *= 2;
+                scoreIncrease += a[i];
                 a[j] = 0;
                 a = shiftRowRight(a);
                 i--;
