@@ -27,7 +27,6 @@ class Board extends Component {
                   <Row value={x} key={i}/>
               )}
             </div>
-            <MovementButtons Board={this.props.Board.present.board}/>
         </div>
     )
   }

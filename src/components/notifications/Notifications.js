@@ -6,11 +6,13 @@ import {connect} from 'react-redux'
 import Loss from "./Loss"
 import Victory from "./Victory"
 
+import './Notifications.css'
+
 const Notifications = props => {
     return (
         <div>
             {props.Notification.victory && !props.Notification.victoryAcknowledged ?
-            (<Victory/>) : null}
+            (<Victory victory={props.Notification.victory} acknowledged={props.Notification.victoryAcknowledged}/>) : null}
 
             {props.Notification.loss ?
             (<Loss pastLength={props.pastLength}/>) : null}
