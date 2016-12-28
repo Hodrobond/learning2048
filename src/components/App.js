@@ -53,7 +53,7 @@ class App extends Component{
             <div>
               <div className='app'>
                   <Board/>
-                  <Notifications Notification={this.props.App.Notifications}
+                  <Notifications Notification={this.props.App}
                     pastLength={this.props.Board.past.length}/>
               </div>
               <Score/>
@@ -65,7 +65,7 @@ class App extends Component{
 
 const mapStateToProps = (state) => {
     return {
-        App: state.App,
+        App: state.App.present,
         Board: state.Board
     }
 }

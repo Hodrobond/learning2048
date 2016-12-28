@@ -10,9 +10,7 @@ const defaultNotifications = {
 }
 
 const init = (state, action) => {
- return {
-         Notifications: defaultNotifications
-       }
+ return defaultNotifications
 }
 
 const App = (state = 0, action) => {
@@ -22,30 +20,26 @@ const App = (state = 0, action) => {
   let newNotifications;
   switch(action.type){
     case 'WIN_GAME':
-      newNotifications = {...state.Notifications,
+      newNotifications = {...state,
                       victory: true}
       break;
     case 'LOSE_GAME':
-      newNotifications = {...state.Notifications,
+      newNotifications = {...state,
                       loss: true}
       break;
     case 'CONTINUE_GAME':
-      newNotifications = {...state.Notifications,
+      newNotifications = {...state,
                       victoryAcknowledged: true}
       break;
     case 'NEW_GAME':
       newNotifications = defaultNotifications;
       break;
     default:
-      newNotifications = {...state.Notifications};
+      newNotifications = state;
       break;
   }
 
-
-//  const newNotifications = Notifications(state.Notifications, action);
-  const newState = {...state,
-                    Notifications: newNotifications};
-  return newState;
+  return newNotifications;
 }
 
 

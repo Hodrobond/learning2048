@@ -6,68 +6,72 @@ const defaultNotifications = {
       victoryAcknowledged: false
 }
 
-const defaultState = {
-  Notifications: defaultNotifications
-};
+const historyTemplate = {
+  past: [],
+  present: [],
+  future: []
+}
 
 it('Initialize', () => {
   const initialized = App(0, {type:'NEW_GAME'});
-  const solution = {
-    Notifications: defaultNotifications
-  };
-  expect(initialized).toEqual(solution);
+  const solution = defaultNotifications;
+  expect(initialized.present).toEqual(solution);
 })
 
 it('Win Game', () => {
-    const wonStatus = App(defaultState, {type:'WIN_GAME'});
-    const solution = {
-      Notifications: {
-        loss: false,
-        victory: true,
-        victoryAcknowledged: false
-      }
-    }
-    expect(wonStatus).toEqual(solution);
+  const testState = {
+    ...historyTemplate,
+    present: defaultNotifications
+  }
+  const wonStatus = App(testState, {type:'WIN_GAME'});
+  const solution = {
+    loss: false,
+    victory: true,
+    victoryAcknowledged: false
+  }
+  expect(wonStatus.present).toEqual(solution);
 })
 
 it('Lose Game', () => {
-  const lostStatus = App(defaultState, {type:'LOSE_GAME'});
-  const solution = {
-    Notifications: {
-      loss: true,
-      victory: false,
-      victoryAcknowledged: false
-    }
+  const testState = {
+    ...historyTemplate,
+    present: defaultNotifications
   }
-  expect(lostStatus).toEqual(solution);
+  const lostStatus = App(testState, {type:'LOSE_GAME'});
+  const solution = {
+    loss: true,
+    victory: false,
+    victoryAcknowledged: false
+  }
+  expect(lostStatus.present).toEqual(solution);
 })
 
 it('Continue Game', () => {
   var testState = {
-    Notifications:{
+    ...historyTemplate,
+    present: {
       ...defaultNotifications,
       victory: true
     }
   }
   const continueStatus = App(testState, {type:'CONTINUE_GAME'});
   const solution = {
-    Notifications: {
-      loss: false,
-      victory: true,
-      victoryAcknowledged: true
-    }
+    loss: false,
+    victory: true,
+    victoryAcknowledged: true
   }
-  expect(continueStatus).toEqual(solution);
+  expect(continueStatus.present).toEqual(solution);
 })
 
 it('New Game', () => {
   const wonkyState = {
-    Notifications: {
+    ...historyTemplate,
+    present: {
       loss: true,
       victory: true,
       victoryAcknowledged: true
     }
   }
   const newStatus = App(wonkyState, {type:'NEW_GAME'});
-  expect(newStatus).toEqual(defaultState)
+  expect(newStatus.present).toEqual(defaultNotifications)
 })

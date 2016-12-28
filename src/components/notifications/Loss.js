@@ -4,7 +4,8 @@
 import React, {Component} from 'react'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
-import {newGame, continueGame} from "../../actions/Notifications"
+import {continueGame} from "../../actions/Notifications"
+import {newGame} from '../../actions/MovementButtons'
 import {undoAmount} from "../../actions/History"
 var Modal = require('react-modal');
 
@@ -12,7 +13,7 @@ class Loss extends Component{
     render(){
         return(
           <Modal
-            isOpen={this.props.App.present.Notifications.loss}
+            isOpen={this.props.App.present.loss}
             contentLabel="Modal"
             className='modal-small loss'
           >
