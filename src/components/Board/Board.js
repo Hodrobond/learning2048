@@ -5,13 +5,13 @@ import React, { Component} from 'react'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import Row from "./Row"
-import { initializeBoard } from '../../actions/MovementButtons'
+import { newGame } from '../../actions/Board'
 
 import './BoardStyle.css'
 
 class Board extends Component {
   componentDidMount() {
-    this.props.initializeBoard();
+    this.props.newGame();
   }
 
   componentWillUnmount(){
@@ -21,6 +21,7 @@ class Board extends Component {
   render(){
     return (
       <div className='boardContainer'>
+        <button className='newGame' onClick={() => this.props.newGame()}>New Game</button>
         <div className='board'>
           {this.props.Board.present.map((x, i) =>
             <Row value={x} key={i}/>
@@ -38,7 +39,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ initializeBoard }, dispatch);
+  return bindActionCreators({ newGame }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)

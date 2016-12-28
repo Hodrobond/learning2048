@@ -5,7 +5,7 @@ import React, {Component} from 'react'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import {continueGame} from "../../actions/Notifications"
-import {newGame} from '../../actions/MovementButtons'
+import {newGame} from '../../actions/Board'
 import {undoAmount} from "../../actions/History"
 var Modal = require('react-modal');
 

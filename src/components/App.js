@@ -9,7 +9,7 @@ import Notifications from "./notifications/Notifications"
 import DevActions from './DevActions'
 import Score from './Score/Score'
 
-import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame} from '../actions/MovementButtons'
+import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame} from '../actions/Board'
 
 import './AppStyle.css'
 
@@ -52,11 +52,21 @@ class App extends Component{
       return (
         <div>
           <div className='app'>
+            <div className='topBar'>
+              <div className='appTitle'>
+                <h1>2048</h1>
+                <p>a learning experience</p>
+              </div>
+              <Score/>
+            </div>
+            <div className='description'>
+              <h2>Here is something</h2>
+              <p>you expected something <span>different</span></p>
+            </div>
             <Board/>
             <Notifications pastLength={this.props.Board.past.length}/>
+            <p className='instructions'>Here is where you would normally learn to play the game</p>
           </div>
-          <Score/>
-          <DevActions/>
         </div>
       )
     }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import {newGame, winGame, loseGame} from '../actions/MovementButtons'
+import {winGame, loseGame} from '../actions/Board'
 import Undo from './history/Undo'
 import Redo from './history/Redo'
 
@@ -17,8 +17,6 @@ class DevActions extends Component {
   render(){
     return(
       <div>
-        <button onClick={() => this.props.newGame()}>DEV - New Game</button>
-        {' '}
         <button onClick={() => this.props.winGame()}>DEV - Win Game</button>
         {' '}
         <button onClick={() => this.props.loseGame()}>DEV - Lose Game</button>
@@ -36,7 +34,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ newGame, winGame, loseGame }, dispatch);
+    return bindActionCreators({ winGame, loseGame }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DevActions)
