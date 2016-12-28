@@ -4,12 +4,6 @@
 import undoable from 'redux-undo'
 import {distinctBoardFilter} from '../utility/Board'
 
-/*
-mergeBoard
-  -rotateLeft/Right
-  -mergeLeft/Right
-addNewTile
-*/
 const Board = (state = 0, action) => {
     if(state === 0){
         return createBoard();
@@ -42,31 +36,29 @@ function createBoard() {
 }
 
 function shiftRowRight(a){
-    var row = a.map(x => x);
-    var previousIndex = row.length - 1;
-    for(let i = row.length - 1; i >= 0 ; i--){
-        if(row[i] !== 0){
-            row[previousIndex] = row[i];
-            if(i !== previousIndex){
-                row[i] = 0;
-            }
-            previousIndex--;
-        }
+  var row = a.map(x => x);
+  var previousIndex = row.length - 1;
+  for(let i = previousIndex; i >= 0 ; i--){
+    if(row[i] !== 0){
+      row[previousIndex] = row[i];
+      if(i !== previousIndex)
+        row[i] = 0;
+      previousIndex--;
     }
-    return row;
+  }
+  return row;
 }
 
 function shiftRowLeft(a){
     var row = a.map(x => x);
     var previousIndex = 0;
-    for(let i = 0; i < row.length ; i++){
-        if(row[i] !== 0){
-            row[previousIndex] = row[i];
-            if(i !== previousIndex){
-                row[i] = 0;
-            }
-            previousIndex++;
-        }
+    for(let i = 0; i < row.length; i++){
+      if(row[i] !== 0){
+        row[previousIndex] = row[i];
+        if(i !== previousIndex)
+          row[i] = 0;
+        previousIndex++;
+      }
     }
     return row;
 }
@@ -83,16 +75,16 @@ function mergeBoardRight(board){
     var a = row.map(x => x);
     a = shiftRowRight(a);
     for(let i = a.length -1; i >= 0; i--){
-        for(let j = i - 1; j >= 0; j--){
-            if(a[j] && a[j] !== 0 && a[i] === a[j]){
-                a[i] *= 2;
-                a[j] = 0;
-                a = shiftRowRight(a);
-                i--;
-            }
-            else if(a[j] !== 0)
-                break;
-        }//j
+      for(let j = i - 1; j >= 0; j--){
+        if(a[j] && a[j] !== 0 && a[i] === a[j]){
+          a[i] *= 2;
+          a[j] = 0;
+          a = shiftRowRight(a);
+          i--;
+        }
+        else if(a[j] !== 0)
+          break;
+      }//j
     }//i
     return a;
   })
@@ -111,16 +103,16 @@ function mergeBoardLeft (board){
     let a = row.map(x => x);
     a = shiftRowLeft(a);
     for(let i = 0; i < a.length; i++){
-        for(let j = i + 1; j < a.length; j++){
-          if(a[j] && a[j] !== 0 && a[i] === a[j]){
-            a[i] *= 2;
-            a[j] = 0;
-            a = shiftRowLeft(a);
-            i++;
-          }
-          else if(a[j] !== 0)
-            break;
-        }//j
+      for(let j = i + 1; j < a.length; j++){
+        if(a[j] && a[j] !== 0 && a[i] === a[j]){
+          a[i] *= 2;
+          a[j] = 0;
+          a = shiftRowLeft(a);
+          i++;
+        }
+        else if(a[j] !== 0)
+          break;
+      }//j
     }//i
     return a;
   })
@@ -131,10 +123,10 @@ function rotateBoardRight(board){
     let temp = new Array(board.length);
     var i, j;
     for(i = 0; i < temp.length; ++i){
-        temp[i] = new Array(temp.length);
-        for (j = 0; j < temp.length; ++j){
-            temp[i][j] = board[temp.length - j - 1][i];
-        }
+      temp[i] = new Array(temp.length);
+      for (j = 0; j < temp.length; ++j){
+        temp[i][j] = board[temp.length - j - 1][i];
+      }
     }
     return temp;
 }
@@ -143,12 +135,12 @@ function rotateBoardLeft(board){
     var temp = new Array(board.length);
     var i, j;
     for(let i = 0; i < temp.length; i++){
-        temp[i] = new Array(temp.length);
+      temp[i] = new Array(temp.length);
     }
     for(i = 0; i < temp.length; ++i){
-        for (j = 0; j < temp.length; ++j){
-            temp[i][j] = board[j][temp.length - i - 1];
-        }
+      for (j = 0; j < temp.length; ++j){
+        temp[i][j] = board[j][temp.length - i - 1];
+      }
     }
     return temp;
 }

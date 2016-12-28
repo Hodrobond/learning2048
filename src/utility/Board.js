@@ -23,10 +23,10 @@ export const calculateScore = (board, isVertical) => {
       var i, j;
       rows = new Array(board.length);
       for(i = 0; i < rows.length; ++i){
-          rows[i] = new Array(rows.length);
-          for (j = 0; j < rows.length; ++j){
-              rows[i][j] = board[rows.length - j - 1][i];
-          }
+        rows[i] = new Array(rows.length);
+        for (j = 0; j < rows.length; ++j){
+          rows[i][j] = board[rows.length - j - 1][i];
+        }
       }
       break;
     default:
@@ -55,13 +55,13 @@ export const calculateScore = (board, isVertical) => {
  }
 
 export const gameWon = (board) => {
- for(let i=0;i<board.length;i++){
+  for(let i=0;i<board.length;i++){
    for(let j=0;j<board[i].length;j++){
      if(board[i][j] === 2048)
        return true;
    }
- }
- return false;
+  }
+  return false;
 }
 
 export const gameLost = (board) => {
@@ -70,23 +70,26 @@ export const gameLost = (board) => {
    return false;
  for(let i=0;i<board.length;i++){
    for(let j=0;j<board[i].length;j++){
-     let current = board[i][j];
-     let right;
-     let left;
-     let up = board[i][j-1];
-     let rightSide = board[i+1];
-     if((!rightSide == null))
-       right = board[i+1][j];
-     let down = board[i][j+1];
-     let leftSide = board[i-1];
-     if(!(leftSide == null))
-       left = board[i-1][j];
+     //premature optimization is the death of code, but it shouldn't bother comparing empty tiles
+     if(board[i][j] !== 0){
+       let current = board[i][j];
+       let right;
+       let left;
+       let up = board[i][j-1];
+       let rightSide = board[i+1];
+       if((!rightSide == null))
+         right = board[i+1][j];
+       let down = board[i][j+1];
+       let leftSide = board[i-1];
+       if(!(leftSide == null))
+         left = board[i-1][j];
 
-     if(current === up
-     ||  current === right
-     ||  current === down
-     ||  current === left){
-       return false;
+       if(current === up
+       ||  current === right
+       ||  current === down
+       ||  current === left){
+         return false;
+       }
      }
    }
  }
@@ -94,20 +97,20 @@ export const gameLost = (board) => {
 }
 
 export const distinctBoard = (currentState, previousState) => {
-    if(previousState === 0)
-      return true;
-    if(previousState === undefined){
+  if(previousState === 0)
+    return true;
+  if(previousState === undefined){
+    return true;
+  }
+  for(var i=0; i<currentState.length; i++){
+    for(var j=0; j<currentState[i].length; j++){
+      if(currentState[i][j] !== previousState[i][j])
         return true;
     }
-    for(var i=0; i<currentState.length; i++){
-        for(var j=0; j<currentState[i].length; j++){
-            if(currentState[i][j] !== previousState[i][j])
-                return true;
-        }
-    }
-    return false;
+  }
+  return false;
 }
 
 export const distinctBoardFilter = (action, currentState, previousState) => {
-    return distinctBoard(currentState, previousState);
+  return distinctBoard(currentState, previousState);
 }

@@ -8,6 +8,7 @@ const randomFromArray = (arr) => {
   return arr[Math.floor((Math.random() * arr.length))];
 }
 
+//numberRate contains percentages for 2^n appearing
 const getNewTileValue = () => {
     var sample = Math.random();
     var numberRate = [0.0125, 0.1, 1];
@@ -42,35 +43,33 @@ export const initializeBoard = () => {
   }
 }
 
-
 const handleMove = (moveType) => {
   return(dispatch, getState) => {
-    let initial = getState().Board.present;
-    dispatch(moveType);
-    let post = getState().Board.present;
+    //obtain initial state information
+    let initialBoard = getState().Board.present;
     let score = getState().Score;
+    dispatch(moveType);
+    //perform post state logic
+      //calculate scores
+    let postBoard = getState().Board.present;
     let isVertical = false;
     if(moveType.type === "MERGE_UP" || moveType.type === "MERGE_DOWN"){
       isVertical = true;
     }
-    let scoreValue = calculateScore(initial, isVertical);
+    let scoreValue = calculateScore(initialBoard, isVertical);
     let newScore = score.currentScore + scoreValue;
     if(scoreValue > 0){
       dispatch(increment(newScore));
       if(score.highScore < newScore)
         dispatch(incrementHigh(newScore));
     }
-    if(gameWon(post)){
+      //determine game win/loss state
+    if(gameWon(postBoard))
       dispatch({type:'WIN_GAME'});
-    }
-    if(gameLost(post)){
+    else if(gameLost(postBoard))
       dispatch({type:'LOSE_GAME'})
-    }
-    post = getState().Board.present;
-    if(distinctBoard(initial, post)
-        && getEmptyIndexes(post).length > 0){
-      dispatch(getNewTileDispatch(post));
-    }//if(distinctBoard(initial, post))
+    else if(distinctBoard(initialBoard, postBoard) && getEmptyIndexes(postBoard).length > 0)
+      dispatch(getNewTileDispatch(postBoard));
   }
 }
 
@@ -100,9 +99,9 @@ export const handleMoveLeft = () => {
 
 export const newGame = () => {
   return(dispatch, getState) => {
-    dispatch({ type: "NEW_GAME"});
+    dispatch({type: "NEW_GAME"});
     initializeBoard()(dispatch, getState);
   }
 }
-export const winGame = () => ({ type: "WIN_GAME"})
-export const loseGame = () => ({ type: "LOSE_GAME"})
+export const winGame = () => ({type: "WIN_GAME"})
+export const loseGame = () => ({type: "LOSE_GAME"})

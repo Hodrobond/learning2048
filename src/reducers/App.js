@@ -9,13 +9,13 @@ const defaultNotifications = {
       victoryAcknowledged: false
 }
 
-const init = (state, action) => {
+const init = () => {
  return defaultNotifications
 }
 
 const App = (state = 0, action) => {
   if(state === 0 || action === 'NEW_GAME'){
-    return init(0, action);
+    return init();
   }
   let newNotifications;
   switch(action.type){
@@ -41,8 +41,6 @@ const App = (state = 0, action) => {
 
   return newNotifications;
 }
-
-
 
 const distinctAppFilter = (action, currentState, previousState) => {
   return true;
