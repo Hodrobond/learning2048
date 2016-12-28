@@ -8,12 +8,12 @@ import Redo from "./Redo"
 import Undo from "./Undo"
 
 const History = () => {
-    return(
-        <div>
-            <Redo/>
-            <Undo/>
-        </div>
-    )
+  return(
+    <div>
+      <Redo/>
+      <Undo/>
+    </div>
+  )
 }
 
 export default connect()(History);

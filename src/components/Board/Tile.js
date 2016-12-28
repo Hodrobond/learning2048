@@ -14,7 +14,7 @@ class Tile extends Component{
 }
 
 Tile.propTypes = {
-    number: PropTypes.number
+  number: PropTypes.number
 }
 
 export default Tile

@@ -9,27 +9,27 @@ import Victory from "./Victory"
 import './Notifications.css'
 
 const Notifications = props => {
-    return (
-        <div>
-            <Victory victory={props.Notification.victory} victoryAcknowledged={props.Notification.victoryAcknowledged}/>
+  return (
+    <div>
+      <Victory victory={props.Notification.victory} victoryAcknowledged={props.Notification.victoryAcknowledged}/>
 
-            <Loss loss={props.Notification.loss} pastLength={props.pastLength}/>
-        </div>
-    )
+      <Loss loss={props.Notification.loss} pastLength={props.pastLength}/>
+    </div>
+  )
 }
 
 const mapStateToProps = (state) => {
-    return {
-        Notification: state.App.present
-    }
+  return {
+    Notification: state.App.present
+  }
 }
 
 Notifications.contextTypes = {
-    store: React.PropTypes.object
+  store: React.PropTypes.object
 }
 
 Notifications.propTypes = {
-    victory: PropTypes.string
+  victory: PropTypes.string
 }
 
 export default connect(mapStateToProps)(Notifications);

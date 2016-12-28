@@ -10,26 +10,26 @@ import {undoAmount} from "../../actions/History"
 var Modal = require('react-modal');
 
 class Loss extends Component{
-    render(){
-        return(
-          <Modal
-            isOpen={this.props.loss}
-            contentLabel="Modal"
-            className='modal-small loss'
-          >
-            <h1>Apologies, but it appears you are unable to continue</h1>
-            <p>Would you like to retry your past 5 moves?</p>
-            <button onClick={() => this.props.newGame()}>NEW GAME</button>
-            <button onClick={() => this.props.undoAmount(this.props.pastLength-5)}>Undo</button>
-          </Modal>
-        )
-    }
+  render(){
+    return(
+      <Modal
+        isOpen={this.props.loss}
+        contentLabel="Modal"
+        className='modal-small loss'
+      >
+        <h1>Apologies, but it appears you are unable to continue</h1>
+        <p>Would you like to retry your past 5 moves?</p>
+        <button onClick={() => this.props.newGame()}>NEW GAME</button>
+        <button onClick={() => this.props.undoAmount(this.props.pastLength-5)}>Undo</button>
+      </Modal>
+    )
+  }
 }
 
 const mapStateToProps = (state) => { return state }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ newGame, continueGame, undoAmount}, dispatch);
+  return bindActionCreators({ newGame, continueGame, undoAmount}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Loss)

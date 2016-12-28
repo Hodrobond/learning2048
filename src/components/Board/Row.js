@@ -5,15 +5,15 @@ import React, { PropTypes } from 'react'
 import Tile from './Tile'
 
 const Row= props => (
-    <div className='boardRow'>{
-        props.value.map((x, i) =>
-            <Tile number={x} key={i}/>
-        )
-    }</div>
+  <div className='boardRow'>{
+    props.value.map((x, i) =>
+      <Tile number={x} key={i}/>
+    )
+  }</div>
 )
 
 Row.propTypes = {
-    number: PropTypes.number
+  value: PropTypes.Array
 }
 
 export default Row

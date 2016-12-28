@@ -15,62 +15,62 @@ import './AppStyle.css'
 
 class App extends Component{
     componentDidMount() {
-        document.onkeydown = this.handleKeyDown.bind(this);
+      document.onkeydown = this.handleKeyDown.bind(this);
     }
 
     componentWillUnmount(){
-        document.removeEventListener("onkeydown", this.handleKeyDown);
+      document.removeEventListener("onkeydown", this.handleKeyDown);
     }
 
     handleKeyDown(event){
-        var code = event.keyCode;
-        if (event.charCode && code === 0)
-            code = event.charCode;
-        switch(code) {
-            case 37:
-                // Key left.
-                this.props.handleMoveLeft()
-                break;
-            case 38:
-                this.props.handleMoveUp()
-                // Key up.
-                break;
-            case 39:
-                this.props.handleMoveRight()
-                // Key right.
-                break;
-            case 40:
-                this.props.handleMoveDown()
-                // Key down.
-                break;
-            default:
-                break;
-        }
+      var code = event.keyCode;
+      if (event.charCode && code === 0)
+        code = event.charCode;
+      switch(code) {
+        case 37:
+          // Key left.
+          this.props.handleMoveLeft()
+          break;
+        case 38:
+          // Key up.
+          this.props.handleMoveUp()
+          break;
+        case 39:
+          // Key right.
+          this.props.handleMoveRight()
+          break;
+        case 40:
+          // Key down.
+          this.props.handleMoveDown()
+          break;
+        default:
+          break;
+      }
     }
 
     render(){
-        return (
-            <div>
-              <div className='app'>
-                  <Board/>
-                  <Notifications pastLength={this.props.Board.past.length}/>
-              </div>
-              <Score/>
-              <DevActions/>
-            </div>
-        )
+      return (
+        <div>
+          <div className='app'>
+            <Board/>
+            <Notifications pastLength={this.props.Board.past.length}/>
+          </div>
+          <Score/>
+          <DevActions/>
+        </div>
+      )
     }
 }
 
 const mapStateToProps = (state) => {
-    return {
-        App: state.App.present,
-        Board: state.Board
-    }
+  return {
+    App: state.App.present,
+    Board: state.Board
+  }
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame}, dispatch);
+  return bindActionCreators({ handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame}, dispatch);
 }
 
 

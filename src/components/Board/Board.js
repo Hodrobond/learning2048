@@ -1,7 +1,7 @@
 /**
  * Created by adam.kazberuk on 12/5/2016.
  */
-import React, { PropTypes, Component} from 'react'
+import React, { Component} from 'react'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import Row from "./Row"
@@ -11,7 +11,7 @@ import './BoardStyle.css'
 
 class Board extends Component {
   componentDidMount() {
-      this.props.initializeBoard();
+    this.props.initializeBoard();
   }
 
   componentWillUnmount(){
@@ -20,33 +20,25 @@ class Board extends Component {
 
   render(){
     return (
-        <div className='boardContainer'>
-            <div className='board'>
-              {this.props.Board.present.map((x, i) =>
-                  <Row value={x} key={i}/>
-              )}
-            </div>
+      <div className='boardContainer'>
+        <div className='board'>
+          {this.props.Board.present.map((x, i) =>
+            <Row value={x} key={i}/>
+          )}
         </div>
+      </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-    return {
-        Board: state.Board
-    }
+  return {
+    Board: state.Board
+  }
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ initializeBoard }, dispatch);
-}
-
-Board.contextTypes = {
-    store: React.PropTypes.object
-}
-
-Board.propTypes = {
-    value: PropTypes.array
+  return bindActionCreators({ initializeBoard }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)

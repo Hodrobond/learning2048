@@ -16,18 +16,18 @@ class DevActions extends Component {
 
   render(){
     return(
-        <div>
-            <button onClick={() => this.props.newGame()}>DEV - New Game</button>
-            {' '}
-            <button onClick={() => this.props.winGame()}>DEV - Win Game</button>
-            {' '}
-            <button onClick={() => this.props.loseGame()}>DEV - Lose Game</button>
-            {' '}
-            <Redo/>
-            {' '}
-            <Undo/>
-        </div>
-        )
+      <div>
+        <button onClick={() => this.props.newGame()}>DEV - New Game</button>
+        {' '}
+        <button onClick={() => this.props.winGame()}>DEV - Win Game</button>
+        {' '}
+        <button onClick={() => this.props.loseGame()}>DEV - Lose Game</button>
+        {' '}
+        <Redo/>
+        {' '}
+        <Undo/>
+      </div>
+    )
   }
 }
 
