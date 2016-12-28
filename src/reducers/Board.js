@@ -79,7 +79,6 @@ function mergeBoardUp (board) {
 }
 
 function mergeBoardRight(board){
-  let scoreIncrease = 0;
   var b = board.map(row => {
     var a = row.map(x => x);
     a = shiftRowRight(a);
@@ -87,7 +86,6 @@ function mergeBoardRight(board){
         for(let j = i - 1; j >= 0; j--){
             if(a[j] && a[j] !== 0 && a[i] === a[j]){
                 a[i] *= 2;
-                scoreIncrease += a[i];
                 a[j] = 0;
                 a = shiftRowRight(a);
                 i--;
@@ -109,7 +107,6 @@ function mergeBoardDown(board) {
 }
 
 function mergeBoardLeft (board){
-  let scoreIncremented = 0;
   let b = board.map(row => {
     let a = row.map(x => x);
     a = shiftRowLeft(a);
@@ -117,7 +114,6 @@ function mergeBoardLeft (board){
         for(let j = i + 1; j < a.length; j++){
           if(a[j] && a[j] !== 0 && a[i] === a[j]){
             a[i] *= 2;
-            scoreIncremented += a[i];
             a[j] = 0;
             a = shiftRowLeft(a);
             i++;
