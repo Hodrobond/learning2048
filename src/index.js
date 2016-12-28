@@ -8,8 +8,9 @@ import combinedReducer from './reducers/index'
 
 import logger from "./middleware/logger"
 
-const rootEl = document.getElementById('root')
+import {calculateScore} from './utility/Board'
 
+const rootEl = document.getElementById('root')
 const render = () => ReactDOM.render(
     <Provider store={createStore(combinedReducer, applyMiddleware(logger, thunk))}>
         <App/>

@@ -16,20 +16,19 @@ const Score = (state = 0, action) => {
   if(state === 0){
     return init();
   }
-  let newScore = state.currentScore + action.value;
   switch(action.type){
     case 'NEW_GAME':
       return init();
     case 'SCORE_INCREMENT':
       return {
         ...state,
-        currentScore: newScore
+        currentScore: action.value
       }
     case 'HIGH_SCORE_INCREMENT':
-      localStorage.setItem( 'highScore', newScore );
+      localStorage.setItem( 'highScore', action.value );
       return{
-        currentScore: newScore,
-        highScore: newScore
+        currentScore: action.value,
+        highScore: action.value
       }
     default:
       return state

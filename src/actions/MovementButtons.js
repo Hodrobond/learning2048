@@ -1,7 +1,7 @@
 /**
  * Created by adam.kazberuk on 12/14/2016.
  */
-import {distinctBoard, getEmptyIndexes, gameWon, gameLost} from '../utility/Board'
+import {calculateScore, distinctBoard, getEmptyIndexes, gameWon, gameLost} from '../utility/Board'
 import {increment, incrementHigh} from './Score'
 
 const randomFromArray = (arr) => {
@@ -37,7 +37,7 @@ export const initializeBoard = () => {
     let maxTiles = 5;
     let numTiles = Math.floor(Math.random() * (maxTiles-minTiles+1))+minTiles;
     for(let i=0;i<numTiles;i++){
-      dispatch(getNewTileDispatch(board.board));
+      dispatch(getNewTileDispatch(board));
     }
   }
 }
@@ -49,19 +49,27 @@ const handleMove = (moveType) => {
     dispatch(moveType);
     let post = getState().Board.present;
     let score = getState().Score;
-    dispatch(increment(post.scoreIncrease));
-    if((score.currentScore + post.scoreIncrease) > score.highScore)
-      dispatch(incrementHigh(post.scoreIncrease));
-    if(gameWon(post.board)){
+    let isVertical = false;
+    if(moveType.type === "MERGE_UP" || moveType.type === "MERGE_DOWN"){
+      isVertical = true;
+    }
+    let scoreValue = calculateScore(initial, isVertical);
+    let newScore = score.currentScore + scoreValue;
+    if(scoreValue > 0){
+      dispatch(increment(newScore));
+      if(score.highScore < newScore)
+        dispatch(incrementHigh(newScore));
+    }
+    if(gameWon(post)){
       dispatch({type:'WIN_GAME'});
     }
-    if(gameLost(post.board)){
+    if(gameLost(post)){
       dispatch({type:'LOSE_GAME'})
     }
     post = getState().Board.present;
-    if(distinctBoard(initial.board, post.board)
-        && getEmptyIndexes(post.board).length > 0){
-      dispatch(getNewTileDispatch(post.board));
+    if(distinctBoard(initial, post)
+        && getEmptyIndexes(post).length > 0){
+      dispatch(getNewTileDispatch(post));
     }//if(distinctBoard(initial, post))
   }
 }

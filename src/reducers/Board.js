@@ -16,35 +16,29 @@ const Board = (state = 0, action) => {
     }
     switch (action.type) {
       case 'MERGE_UP':
-        return mergeBoardUp(state.board);
+        return mergeBoardUp(state);
       case 'MERGE_DOWN':
-        return mergeBoardDown(state.board);
+        return mergeBoardDown(state);
       case 'MERGE_LEFT':
-        return mergeBoardLeft(state.board);
+        return mergeBoardLeft(state);
       case 'MERGE_RIGHT':
-        return mergeBoardRight(state.board);
+        return mergeBoardRight(state);
       case 'NEW_GAME':
           return createBoard();
       case 'ADD_TILE':
-          var newState = state.board.slice();
+          var newState = state.slice();
           newState[action.x][action.y]=action.value;
-          return {
-            ...state,
-            board: newState
-          }
+          return newState;
       default:
           return state;
     }
 }
 
 function createBoard() {
-  return {
-    board: [[0,0,0,0],
+  return [[0,0,0,0],
             [0,0,0,0],
             [0,0,0,0],
-            [0,0,0,0]],
-    scoreIncrease: 0
-  };
+            [0,0,0,0]];
 }
 
 function shiftRowRight(a){
@@ -80,11 +74,8 @@ function shiftRowLeft(a){
 function mergeBoardUp (board) {
     var b = rotateBoardRight(board);
     var c = mergeBoardRight(b);
-    var d = rotateBoardLeft(c.board);
-    return {
-      board:d,
-      scoreIncrease: c.scoreIncrease
-    }
+    var d = rotateBoardLeft(c);
+    return d;
 }
 
 function mergeBoardRight(board){
@@ -107,20 +98,14 @@ function mergeBoardRight(board){
     }//i
     return a;
   })
-  return {
-    board:b,
-    scoreIncrease: scoreIncrease
-  }
+  return b;
 }
 
 function mergeBoardDown(board) {
     var b = rotateBoardLeft(board);
     var c = mergeBoardRight(b);
-    var d = rotateBoardRight(c.board);
-    return {
-      board: d,
-      scoreIncrease: c.scoreIncrease
-    }
+    var d = rotateBoardRight(c);
+    return d;
 }
 
 function mergeBoardLeft (board){
@@ -143,10 +128,7 @@ function mergeBoardLeft (board){
     }//i
     return a;
   })
-  return{
-    board: b,
-    scoreIncrease: scoreIncremented
-  }
+  return b;
 }
 
 function rotateBoardRight(board){

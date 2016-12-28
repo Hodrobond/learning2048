@@ -1,6 +1,45 @@
 /**
  * Created by adam.kazberuk on 12/15/2016.
  */
+
+ export const calculateRow = (row) => {
+   let sum =0;
+   for(let i=0;i<row.length;i++){
+     if(row[i] !== 0){
+       let current = row[i];
+       while(row[i+1] === 0)
+        i++
+      if(row[i+1] === current)
+        sum+=(row[++i] * 2);
+     }
+   }
+   return sum;
+ }
+
+export const calculateScore = (board, isVertical) => {
+  let rows;
+  switch(isVertical){
+    case true:
+      var i, j;
+      rows = new Array(board.length);
+      for(i = 0; i < rows.length; ++i){
+          rows[i] = new Array(rows.length);
+          for (j = 0; j < rows.length; ++j){
+              rows[i][j] = board[rows.length - j - 1][i];
+          }
+      }
+      break;
+    default:
+      rows = board;
+      break;
+  }
+  let sum = 0;
+  for(let i=0; i<rows.length;i++){
+    sum+=calculateRow(rows[i]);
+  }
+  return sum;
+}
+
  export const getEmptyIndexes = (board) => {
    let indicies = [];
    let emptyCount = 0;
