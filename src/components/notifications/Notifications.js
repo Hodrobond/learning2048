@@ -15,7 +15,7 @@ const Notifications = props => {
             (<Victory victory={props.Notification.victory} acknowledged={props.Notification.victoryAcknowledged}/>) : null}
 
             {props.Notification.loss ?
-            (<Loss pastLength={props.pastLength}/>) : null}
+            (<Loss loss={props.Notification.loss} pastLength={props.pastLength}/>) : null}
         </div>
     )
 }

@@ -13,7 +13,7 @@ class Loss extends Component{
     render(){
         return(
           <Modal
-            isOpen={this.props.App.present.loss}
+            isOpen={this.props.loss}
             contentLabel="Modal"
             className='modal-small loss'
           >
