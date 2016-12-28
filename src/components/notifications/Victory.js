@@ -4,7 +4,8 @@
 import React, {Component} from 'react'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
-import {newGame, continueGame} from "../../actions/Notifications"
+import {continueGame} from "../../actions/Notifications"
+import {newGame} from '../../actions/MovementButtons'
 var Modal = require('react-modal');
 
 class Victory extends Component{
@@ -13,6 +14,7 @@ class Victory extends Component{
           <Modal
             isOpen={this.props.victory && !this.props.victoryAcknowledged}
             contentLabel="Modal"
+            className='modal-small loss'
           >
             <h1>Congratulations, you have won! Would you like to continue?</h1>
             <button onClick={() => this.props.newGame()}>NEW GAME</button>
@@ -22,9 +24,9 @@ class Victory extends Component{
     }
 }
 
-
-
-const mapStateToProps = (state) => { return state }
+const mapStateToProps = (state) => {
+  return state;
+}
 
 function mapDispatchToProps(dispatch){
     return bindActionCreators({ newGame, continueGame}, dispatch);

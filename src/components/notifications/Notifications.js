@@ -11,11 +11,9 @@ import './Notifications.css'
 const Notifications = props => {
     return (
         <div>
-            {props.Notification.victory && !props.Notification.victoryAcknowledged ?
-            (<Victory victory={props.Notification.victory} acknowledged={props.Notification.victoryAcknowledged}/>) : null}
+            <Victory victory={props.Notification.victory} victoryAcknowledged={props.Notification.victoryAcknowledged}/>
 
-            {props.Notification.loss ?
-            (<Loss loss={props.Notification.loss} pastLength={props.pastLength}/>) : null}
+            <Loss loss={props.Notification.loss} pastLength={props.pastLength}/>
         </div>
     )
 }
