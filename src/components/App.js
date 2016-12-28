@@ -53,8 +53,7 @@ class App extends Component{
             <div>
               <div className='app'>
                   <Board/>
-                  <Notifications Notification={this.props.App}
-                    pastLength={this.props.Board.past.length}/>
+                  <Notifications pastLength={this.props.Board.past.length}/>
               </div>
               <Score/>
               <DevActions/>
