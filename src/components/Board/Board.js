@@ -29,7 +29,8 @@ class Board extends Component {
                 onSwipedLeft={this.props.handleMoveLeft}
                 onSwipedRight={this.props.handleMoveRight}
                 onSwipedDown={this.props.handleMoveDown}
-                onSwipedUp={this.props.handleMoveUp}>
+                onSwipedUp={this.props.handleMoveUp}
+                preventDefaultEvent={true}>
         <button className='newGame' onClick={() => this.props.newGame()}>New Game</button>
         <div className='board'>
           {this.props.Board.present.map((x, i) =>
