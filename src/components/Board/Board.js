@@ -6,6 +6,9 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import Row from "./Row"
 import { newGame } from '../../actions/Board'
+var Swipe = require('react-swipe-component');
+
+import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft} from '../../actions/Board'
 
 import './BoardStyle.css'
 
@@ -20,14 +23,21 @@ class Board extends Component {
 
   render(){
     return (
-      <div className='boardContainer'>
-        <button className='newGame' onClick={() => this.props.newGame()}>New Game</button>
-        <div className='board'>
-          {this.props.Board.present.map((x, i) =>
-            <Row value={x} key={i}/>
-          )}
+      <Swipe
+                nodeName="div"
+                onSwipedLeft={this.props.handleMoveLeft}
+                onSwipedRight={this.props.handleMoveRight}
+                onSwipedDown={this.props.handleMoveDown}
+                onSwipedUp={this.props.handleMoveUp}>
+        <div className='boardContainer'>
+          <button className='newGame' onClick={() => this.props.newGame()}>New Game</button>
+          <div className='board'>
+            {this.props.Board.present.map((x, i) =>
+              <Row value={x} key={i}/>
+            )}
+          </div>
         </div>
-      </div>
+      </Swipe>
     )
   }
 }
@@ -39,7 +49,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ newGame }, dispatch);
+  return bindActionCreators({ handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)
