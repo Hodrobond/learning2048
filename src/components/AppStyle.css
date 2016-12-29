@@ -1,4 +1,3 @@
-/* Smartphones (landscape) ----------- */
 .app{
   background: #EEE4DB;
   height: 100%;
@@ -8,9 +7,12 @@
   transform: translateX(-50%);
   padding-top: 10px;
 }
+/* Smartphones (landscape) ----------- */
 @media only screen and (orientation: landscape){
   .app{
-    width: 80%;
+    width: 60%;
+    padding-left: 3%;
+    padding-right: 3%;
   }
   .app .topBar .appTitle,
   .app .topBar .scoreContainer{
