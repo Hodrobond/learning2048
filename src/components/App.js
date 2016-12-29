@@ -46,6 +46,7 @@ class App extends Component{
         default:
           break;
       }
+      event.preventDefault();
     }
 
     render(){
