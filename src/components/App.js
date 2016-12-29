@@ -29,23 +29,26 @@ class App extends Component{
         case 37:
           // Key left.
           this.props.handleMoveLeft()
+          event.preventDefault();
           break;
         case 38:
           // Key up.
           this.props.handleMoveUp()
+          event.preventDefault();
           break;
         case 39:
           // Key right.
           this.props.handleMoveRight()
+          event.preventDefault();
           break;
         case 40:
           // Key down.
           this.props.handleMoveDown()
+          event.preventDefault();
           break;
         default:
           break;
       }
-      event.preventDefault();
     }
 
     render(){
