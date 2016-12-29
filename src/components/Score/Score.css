@@ -1,18 +1,19 @@
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-
-}
-
-/* Smartphones (landscape) ----------- */
-@media only screen and (min-width : 321px) {
-
+@media only screen and (orientation: landscape){
+  .scoreBlock:first-child{
+    margin-right: 15px;
+  }
 }
 
 /* Smartphones (portrait) ----------- */
-@media only screen and (max-width : 320px) {
+@media only screen and (orientation: portrait){
   .scoreBlock:first-child{
     margin-right:10px;
   }
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+
 }
 
 /* Desktops and laptops ----------- */

@@ -1,15 +1,5 @@
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-
-}
-
 /* Smartphones (landscape) ----------- */
-@media only screen and (min-width : 321px) {
-
-}
-
-/* Smartphones (portrait) ----------- */
-@media only screen and (max-width : 320px) {
+@media only screen and (orientation: landscape){
   .app{
     width: 90%;
   }
@@ -17,6 +7,31 @@
   .app .topBar .scoreContainer{
     display: inline-block;
   }
+  .description{
+    height: 100px;
+  }
+  .instructions{
+    text-align: center;
+  }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (orientation: portrait){
+  .app{
+    width: 90%;
+  }
+  .app .topBar .appTitle,
+  .app .topBar .scoreContainer{
+    display: inline-block;
+  }
+  .description{
+    height: 100px;
+  }
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+
 }
 
 /* Desktops and laptops ----------- */

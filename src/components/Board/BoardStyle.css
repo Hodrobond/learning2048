@@ -1,26 +1,55 @@
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-  .tile{
-    width:70px;
-    height:70px;
-    line-height:60px;
-    margin: 1px;
-  }
+/* Smartphones (landscape) ----------- */
+@media only screen and (orientation: landscape){
   .boardContainer{
     width: 100%;
   }
+  .boardRow{
+    margin-bottom: 3px;
+  }
+  .boardRow:first-child{
+    margin-top:3px;
+  }
+  .tile{
+    width:75px;
+    height:75px;
+    line-height:75px;
+    margin-right: 3px;
+  }
+  .tile:first-child{
+    margin-left: 3px;
+  }
   .newGame{
-    top: -98px;
+    top: -106px;
   }
 }
 
-/* Smartphones (landscape) ----------- */
-@media only screen and (min-width : 321px) {
-
+/* Smartphones (portrait) ----------- */
+@media only screen and (orientation: portrait){
+  .boardContainer{
+    width: 100%;
+  }
+  .boardRow{
+    margin-bottom: 1px;
+  }
+  .boardRow:first-child{
+    margin-top: 1px;
+  }
+  .tile{
+    width:60px;
+    height:60px;
+    line-height:60px;
+    margin-right: 1px;
+  }
+  .tile:first-child{
+    margin-left: 1px;
+  }
+  .newGame{
+    top: -106px;
+  }
 }
 
-/* Smartphones (portrait) ----------- */
-@media only screen and (max-width : 320px) {
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
 
 }
 
