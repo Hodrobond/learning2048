@@ -53,23 +53,21 @@ class App extends Component{
 
     render(){
       return (
-        <div>
-          <div className='app'>
-            <div className='topBar'>
-              <div className='appTitle'>
-                <h1>2048</h1>
-                <p>a learning<br/>experience</p>
-              </div>
-              <Score/>
+        <div className='app'>
+          <div className='topBar'>
+            <div className='appTitle'>
+              <h1>2048</h1>
+              <p>a learning<br/>experience</p>
             </div>
-            <div className='description'>
-              <h2>Here is something</h2>
-              <p>you expected something <span>different</span></p>
-            </div>
-            <Board/>
-            <Notifications pastLength={this.props.Board.past.length}/>
-            <p className='instructions'>Here is where you would normally learn to play the game</p>
+            <Score/>
           </div>
+          <div className='description'>
+            <h2>Here is something</h2>
+            <p>you expected something <span>different</span></p>
+          </div>
+          <Board/>
+          <Notifications pastLength={this.props.Board.past.length}/>
+          <p className='instructions'>Here is where you would normally learn to play the game</p>
         </div>
       )
     }

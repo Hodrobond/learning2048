@@ -1,4 +1,16 @@
 /* Smartphones (landscape) ----------- */
+.boardContainer .newGame{
+  height: 40px;
+  width: 120px;
+  font-size: 1em;
+}
+
+.tile{
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+}
+
 @media only screen and (orientation: landscape){
   .boardContainer{
     width: 100%;
@@ -50,26 +62,61 @@
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-
+  .boardRow{
+    margin-bottom: 5px;
+  }
+  .boardRow:first-child{
+    margin-top:5px;
+  }
+  .tile{
+    width:90px;
+    height:90px;
+    line-height:90px;
+    margin-right: 5px;
+    font-size: 2em;
+  }
+  .tile:first-child{
+    margin-left: 5px;
+  }
 }
 
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {
+  .boardRow{
+    margin-bottom: 7px;
+  }
+  .boardRow:first-child{
+    margin-top:7px;
+  }
   .tile{
-    width:65px;
-    height:65px;
-    line-height:65px;
-    margin:3px;
+    width:100px;
+    height:100px;
+    line-height:100px;
+    margin-right: 7px;
+    font-size: 2.5em;
+  }
+  .tile:first-child{
+    margin-left: 7px;
   }
 }
 
 /* Large screens ----------- */
 @media only screen  and (min-width : 1824px) {
+  .boardRow{
+    margin-bottom: 5px;
+  }
+  .boardRow:first-child{
+    margin-top:5px;
+  }
   .tile{
-    width:96px;
-    height:96px;
-    line-height:96px;
-    margin: 5px;
+    width:90px;
+    height:90px;
+    line-height:90px;
+    margin-right: 5px;
+    font-size: 2em;
+  }
+  .tile:first-child{
+    margin-left: 5px;
   }
 }
 
@@ -96,17 +143,12 @@
 }
 
 .boardContainer .newGame{
-  height: 40px;
-  width: 120px;
-  font-size: 1em;
+
 }
 
 .tile{
   background: #eee4da;
-  font-weight: bold;
   color: #776e65;
-  display: inline-block;
-  text-align: center;
 }
 .tile-0{
 

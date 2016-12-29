@@ -8,6 +8,8 @@ import combinedReducer from './reducers/index'
 
 import logger from "./middleware/logger"
 
+import './index.css'
+
 const rootEl = document.getElementById('root')
 const render = () => ReactDOM.render(
     <Provider store={createStore(combinedReducer, applyMiddleware(logger, thunk))}>

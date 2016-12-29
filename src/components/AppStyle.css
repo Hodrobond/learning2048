@@ -1,7 +1,16 @@
 /* Smartphones (landscape) ----------- */
+.app{
+  background: #EEE4DB;
+  height: 100%;
+  position: relative;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 10px;
+}
 @media only screen and (orientation: landscape){
   .app{
-    width: 90%;
+    width: 80%;
   }
   .app .topBar .appTitle,
   .app .topBar .scoreContainer{
@@ -18,7 +27,12 @@
 /* Smartphones (portrait) ----------- */
 @media only screen and (orientation: portrait){
   .app{
-    width: 90%;
+    width: 94%;
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+  .sidebar{
+    display: none;
   }
   .app .topBar .appTitle,
   .app .topBar .scoreContainer{
@@ -31,27 +45,31 @@
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-
+  .app{
+    width: 450px;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
 }
 
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {
-
+  .app{
+    width: 35%;
+    padding-left: 3%;
+    padding-right: 3%;
+  }
 }
 
 /* Large screens ----------- */
 @media only screen  and (min-width : 1824px) {
-
+  .app{
+    width: 30%;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
 }
 
-.app{
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  display: inline-block;
-  padding-top: 10px;
-}
 
 .app .topBar{
   position: relative;
