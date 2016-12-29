@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
 import Board from './Board/Board'
 import Notifications from "./notifications/Notifications"
-import DevActions from './DevActions'
 import Score from './Score/Score'
 
 import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame} from '../actions/Board'
