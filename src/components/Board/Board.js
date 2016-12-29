@@ -25,17 +25,16 @@ class Board extends Component {
     return (
       <Swipe
                 nodeName="div"
+                className='boardContainer'
                 onSwipedLeft={this.props.handleMoveLeft}
                 onSwipedRight={this.props.handleMoveRight}
                 onSwipedDown={this.props.handleMoveDown}
                 onSwipedUp={this.props.handleMoveUp}>
-        <div className='boardContainer'>
-          <button className='newGame' onClick={() => this.props.newGame()}>New Game</button>
-          <div className='board'>
-            {this.props.Board.present.map((x, i) =>
-              <Row value={x} key={i}/>
-            )}
-          </div>
+        <button className='newGame' onClick={() => this.props.newGame()}>New Game</button>
+        <div className='board'>
+          {this.props.Board.present.map((x, i) =>
+            <Row value={x} key={i}/>
+          )}
         </div>
       </Swipe>
     )
