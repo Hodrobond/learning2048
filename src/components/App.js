@@ -58,7 +58,7 @@ class App extends Component{
             <div className='topBar'>
               <div className='appTitle'>
                 <h1>2048</h1>
-                <p>a learning experience</p>
+                <p>a learning<br/>experience</p>
               </div>
               <Score/>
             </div>

@@ -1,14 +1,47 @@
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+  .app{
+    width: 90%;
+  }
+  .app .topBar .appTitle,
+  .app .topBar .scoreContainer{
+    display: inline-block;
+  }
+}
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+
+}
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+
+}
+
 .app{
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   display: inline-block;
-  padding-top: 20px;
+  padding-top: 10px;
 }
 
 .app .topBar{
   position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 
 .app .appTitle{
@@ -17,16 +50,14 @@
 
 .app .appTitle h1{
   margin: 0;
-  font-size:70px;
+  font-size: 2em;
   display: inline-block;
 }
 
 .app .appTitle p{
   display: inline-block;
   margin: 0;
-  width: 50%;
   vertical-align: top;
-  margin-top: 1em;
   font-size: 0.5em;
 }
 
@@ -47,7 +78,7 @@
 }
 
 .app .description p{
-  margin: 0 0 10px 0;
+  margin: 0 0 0 0;
 }
 
 .app .description p span{

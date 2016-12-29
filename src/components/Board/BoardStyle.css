@@ -1,43 +1,31 @@
-.board{
-  background: #bbada0;
-  display: inline-block;
-  position: relative;
-  z-index:2;
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  .tile{
+    width:70px;
+    height:70px;
+    line-height:60px;
+    margin: 1px;
+  }
+  .boardContainer{
+    width: 100%;
+  }
+  .newGame{
+    top: -98px;
+  }
 }
 
-.newGame{
-  display: block;
-}
-
-.boardContainer{
-  display: inline-block;
-  position: relative;
-}
-
-.boardContainer .newGame{
-  position: absolute;
-  top: -60px;
-  right: 0px;
-  height: 40px;
-  width: 120px;
-  font-size: 1em;
-}
-
-.boardRow{
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
 
 }
 
-.tile{
-  width:96px;
-  height:96px;
-  line-height:96px;
-  background: #eee4da;
-  font-weight: bold;
-  color: #776e65;
-  margin: 5px;
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+
 }
 
-@media (max-width: 700px){
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
   .tile{
     width:65px;
     height:65px;
@@ -46,21 +34,48 @@
   }
 }
 
-@media (max-width: 400px){
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
   .tile{
-    width:40px;
-    height:40px;
-    line-height:40px;
-    margin: 1px;
+    width:96px;
+    height:96px;
+    line-height:96px;
+    margin: 5px;
   }
 }
 
+
+
+.board{
+  background: #bbada0;
+  display: inline-block;;
+  position: relative;
+  z-index:2;
+}
+
+.newGame{
+  display: block;
+  position: absolute;
+  right:0;
+}
+
+.boardContainer{
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.boardContainer .newGame{
+  height: 40px;
+  width: 120px;
+  font-size: 1em;
+}
+
 .tile{
-  font-size: 20px;
-  max-width: 96px;
-  max-height: 96px;
-  min-width: 40px;
-  min-height: 40px;
+  background: #eee4da;
+  font-weight: bold;
+  color: #776e65;
   display: inline-block;
   text-align: center;
 }
