@@ -68,6 +68,9 @@ class App extends Component{
           <Board/>
           <Notifications pastLength={this.props.Board.past.length}/>
           <p className='instructions'>Here is where you would normally learn to play the game</p>
+          <p className='disclaimer'>
+            Re-created 2048 initially by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli</a>, which was based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and is pretty close to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
+          </p>
         </div>
       )
     }
