@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
 import Board from './Board/Board'
 import Notifications from "./notifications/Notifications"
 import Score from './Score/Score'
+import Solver from './Solver'
 
 import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame} from '../actions/Board'
 
@@ -66,6 +67,7 @@ class App extends Component{
             <p>you expected something <span>different</span></p>
           </div>
           <Board/>
+          <Solver/>
           <Notifications pastLength={this.props.Board.past.length}/>
           <p className='instructions'>Here is where you would normally learn to play the game</p>
           <p className='disclaimer'>

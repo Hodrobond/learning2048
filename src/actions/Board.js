@@ -43,7 +43,7 @@ export const initializeBoard = () => {
   }
 }
 
-const handleMove = (moveType) => {
+export const handleMove = (moveType) => {
   return(dispatch, getState) => {
     //obtain initial state information
     let initialBoard = getState().Board.present;

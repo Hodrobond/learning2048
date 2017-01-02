@@ -1,11 +1,213 @@
 import * as Solver from './Solver'
 
+const emptyBoard = [[0,0,0,0],
+                  [0,0,0,0],
+                  [0,0,0,0],
+                  [0,0,0,0]];
+
+it('rowFilledAmount - empty', () => {
+  const row = [0,0,0,0];
+  expect(Solver.rowFilledAmount(row)).toEqual(0);
+})
+
+it('rowFilledAmount - partial', () => {
+  const row = [0,2,1024,0];
+  expect(Solver.rowFilledAmount(row)).toEqual(2);
+})
+
+it('rowFilledAmount - full', () => {
+  const row = [2,2,4,4];
+  expect(Solver.rowFilledAmount(row)).toEqual(4);
+})
+
 it('isRowOrdered - true', () => {
-  let row = [0,2,4,8];
+  const row = [0,2,4,8];
   expect(Solver.isRowOrdered(row)).toEqual(true);
 })
 
 it('isRowOrdered - false', () => {
-  let row = [0,2,4,2];
+  const row = [0,2,4,2];
   expect(Solver.isRowOrdered(row)).toEqual(false);
+})
+
+it('getColumn', () => {
+  const board = [[0,2,2,2],
+                [2,0,0,2],
+                [0,2,0,4],
+                [8,16,32,64]];
+  expect(Solver.getColumn(board, 0)).toEqual([0,2,0,8]);
+  expect(Solver.getColumn(board, 1)).toEqual([2,0,2,16]);
+  expect(Solver.getColumn(board, 2)).toEqual([2,0,0,32]);
+  expect(Solver.getColumn(board, 3)).toEqual([2,2,4,64]);
+})
+
+it('isTopRightEmpty - true', () => {
+  const board = [[2,2,2,0],
+                [2,2,2,2],
+                [2,2,2,2],
+                [2,2,2,2]];
+  expect(Solver.isTopRightEmpty(board)).toEqual(true);
+})
+
+it('isTopRightEmpty - false', () => {
+  const board = [[0,0,0,2],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,0,0,0]];
+  expect(Solver.isTopRightEmpty(board)).toEqual(false);
+})
+
+it('getAdjacentTiles', () => {
+  const board = [[2,4,8,16],
+                [32,64,128,256],
+                [512,1024,2048,4096],
+                [8192,16384, 32768, 65536]];
+  const solution = [{
+      value: 8,
+      x: 2,
+      y: 0
+    },{
+      value: 256,
+      x: 3,
+      y: 1
+    },{
+      value: 2048,
+      x: 2,
+      y: 2
+    },{
+      value: 64,
+      x: 1,
+      y: 1
+    }];
+  expect(Solver.getAdjacentTiles(board, 1, 2)).toEqual(solution);
+})
+
+it('getAdjacentTiles - corner', () => {
+  const board = [[2,4,8,16],
+                [32,64,128,256],
+                [512,1024,2048,4096],
+                [8192,16384, 32768, 65536]];
+  const solution = [{
+      value: 4,
+      x: 1,
+      y: 0
+    },{
+      value: 32,
+      x: 0,
+      y: 1
+    }];
+  expect(Solver.getAdjacentTiles(board, 0,0)).toEqual(solution);
+})
+
+it('getAdjacentTiles - with empty', () => {
+  const board = [[0,0,0,8],
+                [0,0,0,4],
+                [0,0,0,2],
+                [0,0,0,2]];
+  const solution = [{
+    value: 4,
+    x: 3,
+    y: 1
+  },
+  {
+    value: 2,
+    x: 3,
+    y: 3
+  }];
+  expect(Solver.getAdjacentTiles(board, 2, 3)).toEqual(solution);
+})
+
+it('getChainedValue 1', () => {
+  const board = [[2,2,2,2],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,0,0,0]];
+  const emptyBoard = [[0,0,0,0],
+                      [0,0,0,0],
+                      [0,0,0,0],
+                      [0,0,0,0]];
+  expect(Solver.getChainedValue(0, 3, board, emptyBoard)).toEqual(6);
+})
+
+it('getChainedValue 2', () => {
+  const board = [[2,2,4,8],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,0,0,0]];
+  const emptyBoard = [[0,0,0,0],
+                      [0,0,0,0],
+                      [0,0,0,0],
+                      [0,0,0,0]];
+  expect(Solver.getChainedValue(0, 3, board, emptyBoard)).toEqual(18);
+})
+
+it('getChainedValue 3', () => {
+  const board = [[0,0,0,8],
+                [0,0,0,4],
+                [0,0,0,2],
+                [0,0,0,2]];
+  const emptyBoard = [[0,0,0,0],
+                      [0,0,0,0],
+                      [0,0,0,0],
+                      [0,0,0,0]];
+  expect(Solver.getChainedValue(0, 3, board, emptyBoard)).toEqual(18);
+})
+
+it('getChainedValue 4', () => {
+  const board = [[2,2,4,8],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,0,0,0]];
+  const emptyBoard = [[0,0,0,0],
+                      [0,0,0,0],
+                      [0,0,0,0],
+                      [0,0,0,0]];
+  expect(Solver.getChainedValue(0, 3, board, emptyBoard)).toEqual(18);
+})
+
+it('getChainedBoard', () => {
+  const board = [[0,0,0,8],
+                [0,0,0,4],
+                [0,0,0,2],
+                [0,0,0,2]];
+  const solution = [[0, 0, 0, 18],
+                    [0, 0, 0, 10],
+                    [0, 0, 0, 6],
+                    [0, 0, 0, 6]];
+  expect(Solver.getChainedBoard(board)).toEqual(solution);
+})
+
+
+it('getTotalChainedValue', () => {
+  const board = [[0,0,0,0],
+                [0,0,0,0],
+                [0,0,0,0],
+                [2,2,4,8]];
+  const solution = 40; //18 + 10 + 6 + 6, similar to above test
+  expect(Solver.getTotalChainedValue(board)).toEqual(solution);
+})
+
+
+it('getChainMove - default', () => {
+  const board = [[0,0,0,0],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,0,0,0]];
+  expect(Solver.getChainMove(board)).toEqual('MERGE_UP');
+})
+
+it('getChainMove - simpleChain 1', () => {
+  const board = [[0,0,2,4],
+                [0,0,0,2],
+                [0,0,0,2],
+                [0,0,0,0]];
+  expect(Solver.getChainMove(board)).toEqual('MERGE_UP');
+})
+
+it('getChainMove - simpleChain 2', () => {
+  const board = [[2,2,2,2],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,0,0,0]];
+  expect(Solver.getChainMove(board)).toEqual('MERGE_RIGHT');
 })
