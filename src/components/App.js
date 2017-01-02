@@ -8,6 +8,8 @@ import Board from './Board/Board'
 import Notifications from "./notifications/Notifications"
 import Score from './Score/Score'
 import Solver from './Solver'
+import DevActions from './DevActions'
+//import * as SolverUtil from '../utility/Solver'
 
 import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame} from '../actions/Board'
 
@@ -16,6 +18,16 @@ import './AppStyle.css'
 class App extends Component{
     componentDidMount() {
       document.onkeydown = this.handleKeyDown.bind(this);
+/*      const testBoard = [[4,8,8,32],
+                          [2,0,2,16],
+                          [0,0,0,4],
+                          [2,0,0,0]];
+      const emptyTestBoard = [[0,0,0,0],
+                              [0,0,0,0],
+                              [0,0,0,0],
+                              [0,0,0,0]];
+      const testResults = SolverUtil.getChainedBoard(testBoard);
+      console.log(testResults);*/
     }
 
     componentWillUnmount(){
@@ -68,6 +80,7 @@ class App extends Component{
           </div>
           <Board/>
           <Solver/>
+          <DevActions/>
           <Notifications pastLength={this.props.Board.past.length}/>
           <p className='instructions'>Here is where you would normally learn to play the game</p>
           <p className='disclaimer'>

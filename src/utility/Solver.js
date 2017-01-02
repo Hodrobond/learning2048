@@ -35,7 +35,7 @@ export const isBoardHalfFull = (board) => {
         count++;
     }
   }
-  return count => 8;
+  return count > 8;
 }
 
 export const getChainedBoard = (board) => {
@@ -173,33 +173,50 @@ const canHighestMoveToFarTop = (board) => {
 }
 
 export const getDumbMove = (board) => {
-		if (isTopRightEmpty(board)) {
-      let row0Check = false;
-      for(let qq =0; qq<board.length;qq++){
-        if(board[0][qq] !== 0)
-          row0Check = true
-      }
-			if ( row0Check )
-        return 'MERGE_RIGHT'
-		}
-    const historyBoard = {
-      past: [],
-      present: board,
-      future: []
+	if (isTopRightEmpty(board)) {
+    let row0Check = false;
+    for(let qq =0; qq<board.length;qq++){
+      if(board[0][qq] !== 0)
+        row0Check = true
     }
-    const moveLeft = Board(historyBoard, {type:'MERGE_LEFT'}).present;
-    const moveRight = Board(historyBoard, {type:'MERGE_RIGHT'}).present;
-    const moveDown = Board(historyBoard, {type:'MERGE_DOWN'}).present;
-    const moveUp = Board(historyBoard, {type:'MERGE_UP'}).present;
-
-		if ( distinctBoard(board, moveUp) )
-      return 'MERGE_UP';
-    if ( distinctBoard(board, moveRight) )
-      return 'MERGE_RIGHT';
-    if ( distinctBoard(board, moveLeft) )
-      return 'MERGE_LEFT';
-    return 'MERGE_DOWN';
+		if ( row0Check )
+      return 'MERGE_RIGHT'
 	}
+  const historyBoard = {
+    past: [],
+    present: board,
+    future: []
+  }
+  const moveLeft = Board(historyBoard, {type:'MERGE_LEFT'}).present;
+  const moveRight = Board(historyBoard, {type:'MERGE_RIGHT'}).present;
+  const moveDown = Board(historyBoard, {type:'MERGE_DOWN'}).present;
+  const moveUp = Board(historyBoard, {type:'MERGE_UP'}).present;
+
+  if ( distinctBoard(board, moveUp) )
+    return 'MERGE_UP';
+  if ( distinctBoard(board, moveRight) )
+    return 'MERGE_RIGHT';
+  if ( distinctBoard(board, moveLeft) )
+    return 'MERGE_LEFT';
+  return 'MERGE_DOWN';
+
+}
+
+const canAvoidDown = (board) => {
+  let threeRowFound = false;
+  for(let i=0;i<board.length;i++){
+    let count = 0;
+    for(let j=0; j<board[i].length;j++){
+      if(board[i][j] !== 0)
+        count++
+      if(count == 1 || count == 2 || count == 3)
+        return true
+      else{
+        return false;
+      }
+    }
+  }
+}
 
 export const getChainMove = (board) => {
   const historyBoard = {
@@ -211,21 +228,32 @@ export const getChainMove = (board) => {
   const moveRight = Board(historyBoard, {type:'MERGE_RIGHT'}).present;
   const moveDown = Board(historyBoard, {type:'MERGE_DOWN'}).present;
   const moveUp = Board(historyBoard, {type:'MERGE_UP'}).present;
-  const leftValue = (distinctBoard(board, moveLeft) && isMergedBoard(board, moveLeft))
+
+  const leftValue = getTotalChainedValue(moveLeft);
+  const rightValue = getTotalChainedValue(moveRight);
+  const downValue = getTotalChainedValue(moveDown);
+  const upValue = getTotalChainedValue(moveUp);
+
+  const isUpDistinct = distinctBoard(board, moveUp);
+  const isRightDistinct = distinctBoard(board, moveRight);
+  const isLeftDistinct = distinctBoard(board, moveLeft);
+  const isDownDistinct = distinctBoard(board, moveDown);
+
+/*  const leftValue = (distinctBoard(board, moveLeft) && isMergedBoard(board, moveLeft))
                     ? getTotalChainedValue(moveLeft) : 0;
   const rightValue = (distinctBoard(board, moveRight) && isMergedBoard(board, moveRight))
                     ? getTotalChainedValue(moveRight) : 0;
   const downValue = (distinctBoard(board, moveDown) && isMergedBoard(board, moveDown))
                     ? getTotalChainedValue(moveDown) : 0;
   const upValue = (distinctBoard(board, moveUp) && isMergedBoard(board, moveUp))
-                    ? getTotalChainedValue(moveUp) : 0;
+                    ? getTotalChainedValue(moveUp) : 0;*/
 
   if(isTopRightEmpty(board)){
-    if(distinctBoard(board, moveUp) && canHighestMoveToFarTop(board)){
-      return 'MERGE_UP';
-    }
     if(distinctBoard(board, moveRight) && canHighestMoveToFarRight(board)){
       return 'MERGE_RIGHT';
+    }
+    if(distinctBoard(board, moveUp) && canHighestMoveToFarTop(board)){
+      return 'MERGE_UP';
     }
     if(distinctBoard(board, moveUp)){
       return 'MERGE_UP'
@@ -244,20 +272,39 @@ export const getChainMove = (board) => {
   if(downValue > upValue && downValue > leftValue && downValue > rightValue)
     direction = 'MERGE_DOWN';
 
-  if(direction == "MERGE_UP" && !distinctBoard(board, moveUp))
+  if(direction == "MERGE_UP" && !isUpDistinct)
     direction = 'MERGE_RIGHT';
-  if(direction == "MERGE_RIGHT" && !distinctBoard(board, moveRight))
+  if(direction == "MERGE_RIGHT" && !isRightDistinct)
     direction = 'MERGE_LEFT';
-  if(direction == "MERGE_LEFT" && !distinctBoard(board, moveLeft))
+  if(direction == "MERGE_LEFT" && !isLeftDistinct)
     direction = 'MERGE_DOWN';
+
+  const canUpAvoidDown = (canAvoidDown(moveUp) && isUpDistinct);
+  const canRightAvoidDown = (canAvoidDown(moveRight) && isRightDistinct);
+  const canLeftAvoidDown = (canAvoidDown(moveLeft) && isLeftDistinct);
+  if(direction == "MERGE_DOWN"){
+    if(canUpAvoidDown)
+      return 'MERGE_UP';
+    if(canRightAvoidDown)
+      return 'MERGE_RIGHT';
+    if(canLeftAvoidDown)
+      return 'MERGE_LEFT';
+  }
+  if(direction == 'MERGE_LEFT'){
+    if(canUpAvoidDown)
+      return 'MERGE_UP'
+  }
 
   return direction;
 }
 
 
 export const getMove = (board) => {
-  if(isBoardHalfFull(board))
+  let isHalfFull = isBoardHalfFull(board);
+  if(isHalfFull){
     return getChainMove(board);
-  else
+  }
+  else{
     return getDumbMove(board);
+  }
 }

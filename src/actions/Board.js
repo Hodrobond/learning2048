@@ -68,7 +68,7 @@ export const handleMove = (moveType) => {
       dispatch({type:'WIN_GAME'});
     else if(gameLost(postBoard))
       dispatch({type:'LOSE_GAME'})
-    else if(distinctBoard(initialBoard, postBoard) && getEmptyIndexes(postBoard).length > 0)
+    if(distinctBoard(initialBoard, postBoard) && getEmptyIndexes(postBoard).length > 0)
       dispatch(getNewTileDispatch(postBoard));
   }
 }
