@@ -15,6 +15,7 @@ class Solver extends Component {
   render(){
     return(
       <div>
+        <p>Use hints/solver at your own risk. This is still stupider than a goat.</p>
         <button onClick={() => this.props.getMove()}>Solve Game</button>
         <button onClick={() => this.props.hintMove()}>Hint Move</button>
       </div>
