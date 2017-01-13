@@ -255,6 +255,18 @@ it('canMergeAboveValue - 3', () => {
   expect(Solver.canMergeAboveValue(8, testBoard)).toEqual(solution)
 })
 
+it('canMergeAboveValue - depth 2', () => {
+  const testBoard = [[8,16,64,128],
+                      [2,2,4,64],
+                      [2,0,4,4],
+                      [0,0,0,2]];
+  const solution = {
+    direction: 'MERGE_LEFT',
+    highestMerged: 64
+  };
+  expect(Solver.canMergeAboveValue(16, testBoard, 2)).toEqual(solution);
+})
+
 it('isRowEclectic - true', () => {
   const testBoard = [[2,4,8,16],
                       [0,0,0,0],

@@ -187,6 +187,11 @@ export const canHighestMoveToFarTop = (board) => {
 }
 
 export const getDumbMove = (board) => {
+  const mergeTest = canMergeAboveValue(16, board, 2);
+  if(mergeTest && mergeTest.highestMerged > 0){
+    return mergeTest.direction;
+  }
+
   const historyBoard = {
     past: [],
     present: board,
@@ -259,8 +264,8 @@ export const canMergeAboveValue = (minValue, board, depth) => {
             for(let j in moves){
               let newMove = Board(historyBoard, moves[j]).present;
               let newMergeVal = canMergeAboveValue(minValue, newMove, depth-1);
-              if(newMergeVal > highestMerged){
-                highestMerged = newMergeVal;
+              if(newMergeVal.highestMerged > highestMerged){
+                highestMerged = newMergeVal.highestMerged;
                 direction = moves[j].type;
               }
             }
