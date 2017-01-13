@@ -8,7 +8,7 @@ import Board from './Board/Board'
 import Notifications from "./notifications/Notifications"
 import Score from './Score/Score'
 import Solver from './Solver'
-import DevActions from './DevActions'
+//import DevActions from './DevActions'
 //import * as SolverUtil from '../utility/Solver'
 
 import {handleMoveUp, handleMoveRight, handleMoveDown, handleMoveLeft, newGame, winGame} from '../actions/Board'
@@ -80,7 +80,6 @@ class App extends Component{
           </div>
           <Board/>
           <Solver/>
-          <DevActions/>
           <Notifications pastLength={this.props.Board.past.length}/>
           <p className='instructions'>Here is where you would normally learn to play the game</p>
           <p className='disclaimer'>

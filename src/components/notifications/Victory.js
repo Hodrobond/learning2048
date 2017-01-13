@@ -17,8 +17,8 @@ class Victory extends Component{
         className='modal-small loss'
       >
         <h1>Congratulations, you have won! Would you like to continue?</h1>
-        <button onClick={() => this.props.newGame()}>NEW GAME</button>
-        <button onClick={() => this.props.continueGame()}>CONTINUE GAME</button>
+        <button className='new-game notification-button' onClick={() => this.props.newGame()}>New Game</button>
+        <button className='continue-game notification-button' onClick={() => this.props.continueGame()}>Continue Game</button>
       </Modal>
     )
   }
