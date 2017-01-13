@@ -187,27 +187,86 @@ it('getTotalChainedValue', () => {
   expect(Solver.getTotalChainedValue(board)).toEqual(solution);
 })
 
-
-it('getChainMove - default', () => {
-  const board = [[0,0,0,0],
-                [0,0,0,0],
-                [0,0,0,0],
-                [0,0,0,0]];
-  expect(Solver.getChainMove(board)).toEqual('MERGE_UP');
+it('canHighestMoveToFarRight - true', () => {
+  const testBoard = [[1024,0,0,0],
+                      [4,4,4,4],
+                      [2,2,2,2],
+                      [8,16,32,64]];
+  expect(Solver.canHighestMoveToFarRight(testBoard)).toBe(true);
 })
 
-it('getChainMove - simpleChain 1', () => {
-  const board = [[0,0,2,4],
-                [0,0,0,2],
-                [0,0,0,2],
-                [0,0,0,0]];
-  expect(Solver.getChainMove(board)).toEqual('MERGE_UP');
+it('canHighestMoveToFarRight - false', () => {
+  const testBoard = [[1024,2,0,0],
+                      [0,0,0,0],
+                      [0,0,0,0],
+                      [0,0,0,0]];
+  expect(Solver.canHighestMoveToFarTop(testBoard)).toBe(false);
 })
 
-it('getChainMove - simpleChain 2', () => {
-  const board = [[2,2,2,2],
-                [0,0,0,0],
-                [0,0,0,0],
-                [0,0,0,0]];
-  expect(Solver.getChainMove(board)).toEqual('MERGE_RIGHT');
+it('canHighestMoveToFarTop - true', () => {
+  const testBoard = [[2,2,2,0],
+                      [4,4,4,0],
+                      [8,8,8,0],
+                      [16,32,64,1024]];
+  expect(Solver.canHighestMoveToFarTop(testBoard)).toBe(true);
+})
+
+it('canHighestMoveToFarTop - false', () => {
+  const testBoard = [[0,0,0,2],
+                      [0,0,0,0],
+                      [0,0,0,0],
+                      [0,0,0,2048]];
+  expect(Solver.canHighestMoveToFarTop(testBoard)).toBe(false);
+})
+
+it('canMergeAboveValue - 1', () => {
+  const testBoard = [[2,2,16,2],
+                      [2,2,16,2],
+                      [2,2,2,2],
+                      [2,2,2,2]];
+  const solution = {
+    direction: 'MERGE_UP',
+    highestMerged: 16
+  };
+  expect(Solver.canMergeAboveValue(8, testBoard)).toEqual(solution)
+})
+
+it('canMergeAboveValue - 2', () => {
+  const testBoard = [[2,2,16,2],
+                      [2,2,2,2],
+                      [2,2,16,2],
+                      [2,2,2,2]];
+  const solution = {
+    direction: undefined,
+    highestMerged: 0
+  };
+  expect(Solver.canMergeAboveValue(8, testBoard)).toEqual(solution)
+})
+
+it('canMergeAboveValue - 3', () => {
+  const testBoard = [[2,2,16,16],
+                      [2,2,2,2],
+                      [2,2,16,2],
+                      [2,2,2,2]];
+  const solution = {
+    direction: 'MERGE_RIGHT',
+    highestMerged: 16
+  };
+  expect(Solver.canMergeAboveValue(8, testBoard)).toEqual(solution)
+})
+
+it('isRowEclectic - true', () => {
+  const testBoard = [[2,4,8,16],
+                      [0,0,0,0],
+                      [0,0,0,0],
+                      [0,0,0,0]];
+  expect(Solver.isRowEclectic(testBoard[0])).toEqual(true);
+})
+
+it('isRowEclectic - false ', () => {
+  const testBoard = [[2,2,8,16],
+                      [0,0,0,0],
+                      [0,0,0,0],
+                      [0,0,0,0]];
+  expect(Solver.isRowEclectic(testBoard[0])).toEqual(false);
 })

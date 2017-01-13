@@ -2,6 +2,20 @@
  * Created by adam.kazberuk on 12/15/2016.
  */
 
+export const calculateMerged = (oldBoard, newBoard) => {
+  let oldCount = 0;
+  let newCount = 0;
+  for(let i=0; i<oldBoard.length;i++){
+    for(let j=0; j<oldBoard[i].length; j++){
+      if(oldBoard[j][i] !== 0)
+        oldCount++;
+      if(newBoard[j][i] !== 0)
+        newCount++;
+    }
+  }
+  return Math.abs(oldCount - newCount);
+}
+
  export const calculateRow = (row) => {
    let sum =0;
    for(let i=0;i<row.length;i++){

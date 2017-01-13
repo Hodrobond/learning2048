@@ -11,7 +11,8 @@ const randomFromArray = (arr) => {
 //numberRate contains percentages for 2^n appearing
 const getNewTileValue = () => {
     var sample = Math.random();
-    var numberRate = [0.0125, 0.1, 1];
+//    var numberRate = [0.0125, 0.1, 1];
+    var numberRate = [0.1, 1];
     var toPopulate = numberRate.map(x => {return (sample < x)});
     for(let index = 0; index < toPopulate.length; index++){
         if(toPopulate[index] === true)

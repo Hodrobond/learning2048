@@ -21,10 +21,10 @@ export const hintMove = () => {
 
 export const tenHints = () => {
   return(dispatch, getState) => {
-    for(let i=0; i<10; i++){
+    for(let i=0; i<100; i++){
       let board = getState().Board.present;
       var type = Solver.getMove(board);
-      handleMove({type: type})(dispatch, getState);      
+      handleMove({type: type})(dispatch, getState);
     }
   }
 }
