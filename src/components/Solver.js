@@ -18,7 +18,7 @@ class Solver extends Component {
         <p>Use hints/solver at your own risk. This is still stupider than a goat.</p>
         <button onClick={() => this.props.getMove()}>Solve Game</button>
         <button onClick={() => this.props.hintMove()}>Hint Move</button>
-        <button onClick={() => this.props.tenHints()}>Ten hints</button>
+        <button onClick={() => this.props.tenHints()}>One Hundred hints</button>
       </div>
     )
   }
