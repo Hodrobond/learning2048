@@ -3,7 +3,7 @@
  */
 import {calculateScore, distinctBoard, getEmptyIndexes, gameWon, gameLost} from '../utility/Board'
 import {increment, incrementHigh} from './Score'
-import {resolveHint} from './Solver'
+import {resolveHint, stopSolving} from './Solver'
 
 const randomFromArray = (arr) => {
   return arr[Math.floor((Math.random() * arr.length))];
@@ -67,10 +67,15 @@ export const handleMove = (moveType) => {
         dispatch(incrementHigh(newScore));
     }
       //determine game win/loss state
-    if(gameWon(postBoard))
+    let victoryAcknowledged = getState().App.present.victoryAcknowledged;
+    if(gameWon(postBoard) && !victoryAcknowledged){
+      dispatch(stopSolving());
       dispatch({type:'WIN_GAME'});
-    else if(gameLost(postBoard))
+    }
+    else if(gameLost(postBoard)){
+      dispatch(stopSolving());
       dispatch({type:'LOSE_GAME'})
+    }
     if(distinctBoard(initialBoard, postBoard) && getEmptyIndexes(postBoard).length > 0)
       dispatch(getNewTileDispatch(postBoard));
   }
