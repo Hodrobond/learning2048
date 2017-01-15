@@ -237,7 +237,7 @@ it('canMergeAboveValue - 2', () => {
                       [2,2,16,2],
                       [2,2,2,2]];
   const solution = {
-    direction: undefined,
+    direction: 'MERGE_UP',
     highestMerged: 0
   };
   expect(Solver.canMergeAboveValue(8, testBoard)).toEqual(solution)
@@ -255,7 +255,7 @@ it('canMergeAboveValue - 3', () => {
   expect(Solver.canMergeAboveValue(8, testBoard)).toEqual(solution)
 })
 
-it('canMergeAboveValue - depth 2', () => {
+it('canMergeAboveValue - depth 1', () => {
   const testBoard = [[8,16,64,128],
                       [2,2,4,64],
                       [2,0,4,4],
@@ -267,6 +267,43 @@ it('canMergeAboveValue - depth 2', () => {
   expect(Solver.canMergeAboveValue(16, testBoard, 2)).toEqual(solution);
 })
 
+it('canMergeAboveValue - depth 2', () => {
+  const testBoard = [[2,2,2,2],
+                      [0,0,0,8],
+                      [0,0,0,0],
+                      [0,0,0,0]];
+  const solution = {
+    direction: 'MERGE_RIGHT',
+    highestMerged: 8
+  };
+  expect(Solver.canMergeAboveValue(8, testBoard, 3)).toEqual(solution);
+})
+
+it('canMergeAboveValue - depth 3', () => {
+  const testBoard = [[0,0,16,16],
+                      [0,0,0,0],
+                      [0,0,0,0],
+                      [0,0,0,0]];
+  const solution = {
+    direction: 'MERGE_RIGHT',
+    highestMerged: 16
+  };
+  expect(Solver.canMergeAboveValue(8, testBoard, 3)).toEqual(solution);
+})
+
+it('canMergeAboveValue - depth 4', () => {
+  const testBoard = [[2,8,16,16],
+                      [4,0,0,2],
+                      [0,0,0,4],
+                      [0,0,0,0]];
+  const solution = {
+    direction: 'MERGE_RIGHT',
+    highestMerged: 16
+  };
+  expect(Solver.canMergeAboveValue(8, testBoard, 2)).toEqual(solution);
+})
+
+
 it('isRowEclectic - true', () => {
   const testBoard = [[2,4,8,16],
                       [0,0,0,0],
@@ -277,6 +314,14 @@ it('isRowEclectic - true', () => {
 
 it('isRowEclectic - false ', () => {
   const testBoard = [[2,2,8,16],
+                      [0,0,0,0],
+                      [0,0,0,0],
+                      [0,0,0,0]];
+  expect(Solver.isRowEclectic(testBoard[0])).toEqual(false);
+})
+
+it('isRowEclectic - 0 false', () => {
+  const testBoard = [[0,2,8,16],
                       [0,0,0,0],
                       [0,0,0,0],
                       [0,0,0,0]];

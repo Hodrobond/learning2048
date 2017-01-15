@@ -26,7 +26,7 @@ export const isRowOrdered = (row) => {
 export const isRowEclectic = (row) => {
   for(let i=0;i<row.length;i++)
     for(let j=0;j<row.length;j++)
-      if(row[i] === row[j] && row[i] !== 0 && row[j] !== 0 && (i !== j)){
+      if((row[i] === row[j] && (i !== j)) || row[i] === 0 || row[j] === 0){
         return false;
       }
   return true;
@@ -187,11 +187,11 @@ export const canHighestMoveToFarTop = (board) => {
 }
 
 export const getDumbMove = (board) => {
-  const mergeTest = canMergeAboveValue(16, board, 2);
+/*  const mergeTest = canMergeAboveValue(16, board, 2);
   if(mergeTest && mergeTest.highestMerged > 0){
     return mergeTest.direction;
   }
-
+*/
   const historyBoard = {
     past: [],
     present: board,
@@ -259,19 +259,32 @@ export const canMergeAboveValue = (minValue, board, depth) => {
               highestMerged = tile;
             }
           }
-          if(depth > 1){
-            let moves = [{type:'MERGE_UP'},{type:'MERGE_RIGHT'},{type:'MERGE_LEFT'},{type:'MERGE_DOWN'}]
-            for(let j in moves){
-              let newMove = Board(historyBoard, moves[j]).present;
-              let newMergeVal = canMergeAboveValue(minValue, newMove, depth-1);
-              if(newMergeVal.highestMerged > highestMerged){
-                highestMerged = newMergeVal.highestMerged;
-                direction = moves[j].type;
-              }
-            }
-          }
-        }
+        }//for in adjacent tiles
       }//if tile > minValue
+    }
+  }
+
+  if(depth > 1){
+    let moves = [{type:'MERGE_UP'},{type:'MERGE_RIGHT'},{type:'MERGE_LEFT'},{type:'MERGE_DOWN'}]
+    for(let j in moves){
+      let newMove = Board(historyBoard, moves[j]).present;
+      let newMergeVal = canMergeAboveValue(minValue, newMove, depth-1);
+      if(newMergeVal.highestMerged > highestMerged){
+        highestMerged = newMergeVal.highestMerged;
+        direction = moves[j].type;
+      }
+    }
+  }
+
+  if(direction === undefined){
+    let secondMoves = [{type:'MERGE_UP'},{type:'MERGE_RIGHT'},{type:'MERGE_LEFT'},{type:'MERGE_DOWN'}]
+    for(let j in secondMoves){
+      let newBoard = Board(historyBoard, secondMoves[j]).present;
+      secondMoves[j].isDistinct = distinctBoard(newBoard, board);
+      if(secondMoves[j].isDistinct){
+        direction = secondMoves[j].type;
+        break;
+      }
     }
   }
   return {highestMerged, direction};
@@ -420,6 +433,11 @@ export const getReactMove = (boardA, depth, attempts, criteria) => {
         }
         break;
     }
+    const mergeTest = canMergeAboveValue(16, board, 2);
+    if(mergeTest.highestMerged > 0){
+      best.move = {type: mergeTest.direction};
+      best.score = mergeTest.highestMerged;
+    }
     if(best.move && best.move.type === 'MERGE_DOWN'){
       const avoidDown = canAvoidDown(board);
       if(avoidDown){
@@ -430,11 +448,6 @@ export const getReactMove = (boardA, depth, attempts, criteria) => {
           }
         }
       }
-    }
-    const mergeTest = canMergeAboveValue(16, board, 2);
-    if(mergeTest.highestMerged > 0){
-      best.move = {type: mergeTest.direction};
-      best.score = mergeTest.highestMerged;
     }
     bestCollection.push({
       move: best.move,
@@ -457,11 +470,13 @@ export const getReactMove = (boardA, depth, attempts, criteria) => {
     count: 0
   };
   for(let c=0; c<bestCollection.length; c++){
-    count[bestCollection[c].move.type]++;
-    score[bestCollection[c].move.type] = bestCollection[c].move.score;
-    if(count[bestCollection[c].move.type] > highestMove.count){
-      highestMove = bestCollection[c];
-      highestMove.count = count[bestCollection[c].move.type];
+    if(bestCollection[c].move){
+      count[bestCollection[c].move.type]++;
+      score[bestCollection[c].move.type] = bestCollection[c].move.score || 0;
+      if(count[bestCollection[c].move.type] > highestMove.count){
+        highestMove = bestCollection[c];
+        highestMove.count = count[bestCollection[c].move.type];
+      }
     }
   }
   return highestMove;
@@ -497,18 +512,23 @@ export const getMove = (board) => {
 
   if(isMostlyFull){
     let reactMove = getReactMove(board, 6, 3, 'chain');
-    move = reactMove.move.type;
+    if(reactMove.move)
+      move = reactMove.move.type;
   }
   else if(isHalfFull){
 //    move = getSmartMove(board, 3);
 //    move = chainMove.direction;
     let reactMove = getReactMove(board, 4, 3, 'chain');
-    move = reactMove.move.type;
+    if(reactMove.move)
+      move = reactMove.move.type;
   }
   else{
     move = getDumbMove(board);
   }
-
+  if(move === undefined){
+    console.error('game lost, cannot return a move');
+    return {type:'qq'};
+  }
 
   return move;
 }
