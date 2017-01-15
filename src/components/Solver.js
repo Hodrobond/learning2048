@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import {solveGame, stopSolving, hintMove, tenHints} from '../actions/Solver'
+import {solveGame, stopSolving, hintMove} from '../actions/Solver'
 
 class Solver extends Component {
   componentDidMount() {
@@ -24,7 +24,6 @@ class Solver extends Component {
         <p>Use hints/solver at your own risk. This is still stupider than a goat.</p>
         {solverButton}
         <button onClick={() => this.props.hintMove()}>Hint Move</button>
-        <button onClick={() => this.props.tenHints()}>One Hundred hints</button>
       </div>
     )
   }
@@ -37,7 +36,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ solveGame, stopSolving, hintMove, tenHints }, dispatch);
+    return bindActionCreators({ solveGame, stopSolving, hintMove }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Solver)
