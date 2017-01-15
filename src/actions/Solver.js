@@ -1,13 +1,23 @@
 import * as Solver from '../utility/Solver'
 import {handleMove} from './Board'
 
-export const getMove = () => {
+let solveInterval;
+
+export const solveGame = () => {
   return(dispatch, getState) => {
-    setInterval(function(){
+    dispatch({type: 'START_SOLVING'});
+      solveInterval = setInterval(function(){
       let board = getState().Board.present;
       var type = Solver.getMove(board);
       handleMove({type: type})(dispatch, getState);
-    }, 500);
+    }, 200);
+  }
+}
+
+export const stopSolving = () => {
+  return(dispatch, getState) => {
+    dispatch({type: 'STOP_SOLVING'});
+    clearInterval(solveInterval);
   }
 }
 
