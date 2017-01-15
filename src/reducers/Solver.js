@@ -5,7 +5,8 @@
 */
 const initState = () => {
   return {
-    solving: false
+    solving: false,
+    hint: null
   }
 }
 
@@ -23,7 +24,17 @@ const Solver = (state = 0, action) => {
       case 'STOP_SOLVING':
         return newState = {
           ...state,
-          solving: false
+          solving: false,
+        }
+      case 'HINT':
+        return {
+          ...state,
+          hint: action.direction
+        }
+      case 'RESOLVE_HINT':
+        return{
+          ...state,
+          hint: null
         }
       default:
         return state;

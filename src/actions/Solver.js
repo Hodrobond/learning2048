@@ -24,7 +24,13 @@ export const stopSolving = () => {
 export const hintMove = () => {
   return(dispatch, getState) => {
     let board = getState().Board.present;
-    var type = Solver.getMove(board);
-    handleMove({type: type})(dispatch, getState);
+    var direction = Solver.getMove(board);
+    dispatch({type: 'HINT', direction: direction})
+  }
+}
+
+export const resolveHint = () => {
+  return(dispatch, getState) => {
+    dispatch({type: 'RESOLVE_HINT'});
   }
 }

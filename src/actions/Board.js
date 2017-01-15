@@ -3,6 +3,7 @@
  */
 import {calculateScore, distinctBoard, getEmptyIndexes, gameWon, gameLost} from '../utility/Board'
 import {increment, incrementHigh} from './Score'
+import {resolveHint} from './Solver'
 
 const randomFromArray = (arr) => {
   return arr[Math.floor((Math.random() * arr.length))];
@@ -46,6 +47,7 @@ export const initializeBoard = () => {
 
 export const handleMove = (moveType) => {
   return(dispatch, getState) => {
+    dispatch(resolveHint());
     //obtain initial state information
     let initialBoard = getState().Board.present;
     let score = getState().Score;
